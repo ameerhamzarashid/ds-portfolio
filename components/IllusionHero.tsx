@@ -23,27 +23,33 @@ export default function IllusionHero() {
       <div className="absolute left-1/2 top-1/2 h-[460px] w-[460px] -translate-x-1/2 -translate-y-1/2 rounded-full orbit-ring" />
       <div className="absolute left-1/2 top-1/2 h-[300px] w-[300px] -translate-x-1/2 -translate-y-1/2 rounded-full border border-white/10" />
 
-      <div className="relative mx-auto grid max-w-7xl items-center gap-12 lg:grid-cols-[1.05fr_0.95fr]">
+      <div className="relative mx-auto grid max-w-7xl items-center gap-12 lg:grid-cols-[1.08fr_0.92fr]">
         <motion.div
           initial={{ opacity: 0, y: 35 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
         >
-          <p className="mb-5 inline-flex rounded-full border border-cyan-300/20 bg-white/5 px-5 py-2 text-sm font-semibold uppercase tracking-[0.25em] text-cyan-200 backdrop-blur-xl">
-            Data Scientist • AI Systems • Analytics
+          <p className="mb-5 inline-flex rounded-full border border-cyan-300/20 bg-white/5 px-5 py-2 text-sm font-semibold uppercase tracking-[0.22em] text-cyan-200 backdrop-blur-xl">
+            A story told through data, models and motion
           </p>
 
-          <h1 className="max-w-4xl text-5xl font-black leading-tight text-white md:text-7xl">
+          <p className="font-display text-xl uppercase tracking-[0.45em] text-white/80 md:text-2xl">
             Ameer Hamza
+          </p>
+
+          <h1 className="mt-4 max-w-4xl text-5xl font-black leading-tight text-white md:text-7xl">
+            Every signal begins as noise.
             <span className="block gradient-text">
-              builds intelligent data experiences.
+              I turn it into systems, insight and experience.
             </span>
           </h1>
 
           <p className="mt-7 max-w-2xl text-lg leading-8 text-slate-200">
-            I create machine learning systems, analytics dashboards, 3D web
-            experiences, MLOps workflows and applied AI products that turn data
-            into decisions.
+            My work starts where raw information feels overwhelming. I build
+            dashboards that explain it, models that learn from it and interfaces
+            that make it feel alive. From racing telemetry and medical imaging to
+            federated 6G research, each project is a journey from complexity to
+            clarity.
           </p>
 
           <div className="mt-8 flex flex-wrap gap-4">
@@ -51,14 +57,14 @@ export default function IllusionHero() {
               href="#projects"
               className="rounded-full bg-white px-7 py-3 font-bold text-blue-950 transition hover:bg-cyan-100"
             >
-              View Projects
+              Explore the Work
             </a>
 
             <a
-              href="#data-visuals"
+              href="#case-studies"
               className="rounded-full bg-cyan-300 px-7 py-3 font-bold text-slate-950 transition hover:bg-cyan-200"
             >
-              View Data Visuals
+              Read the Story
             </a>
 
             <a
@@ -70,7 +76,7 @@ export default function IllusionHero() {
             </a>
           </div>
 
-          <div className="mt-6 flex flex-wrap gap-4 text-sm">
+          <div className="mt-6 flex flex-wrap gap-5 text-sm">
             <a
               href="https://github.com/ameerhamzarashid"
               target="_blank"
@@ -100,9 +106,45 @@ export default function IllusionHero() {
           <div className="mt-10 grid grid-cols-2 gap-4 md:grid-cols-4">
             <CounterCard value={10} suffix="+" label="Projects" />
             <CounterCard value={3} suffix="+" label="Years Experience" />
-            <CounterCard value={5} suffix="+" label="AI/ML Domains" />
+            <CounterCard value={5} suffix="+" label="AI / ML Domains" />
             <CounterCard value={20} suffix="+" label="Tools" />
           </div>
+
+          <div className="mt-10 grid gap-4 md:grid-cols-3">
+            <div className="glass-card rounded-2xl p-5">
+              <p className="story-line pl-2 text-sm font-semibold uppercase tracking-[0.2em] text-cyan-200">
+                Observe
+              </p>
+              <p className="mt-3 text-sm leading-6 text-slate-300">
+                I begin with messy signals, real datasets and unanswered
+                questions.
+              </p>
+            </div>
+
+            <div className="glass-card rounded-2xl p-5">
+              <p className="story-line pl-2 text-sm font-semibold uppercase tracking-[0.2em] text-cyan-200">
+                Model
+              </p>
+              <p className="mt-3 text-sm leading-6 text-slate-300">
+                I shape patterns into machine learning systems, analysis and
+                decision logic.
+              </p>
+            </div>
+
+            <div className="glass-card rounded-2xl p-5">
+              <p className="story-line pl-2 text-sm font-semibold uppercase tracking-[0.2em] text-cyan-200">
+                Experience
+              </p>
+              <p className="mt-3 text-sm leading-6 text-slate-300">
+                I turn technical depth into usable products, visuals and
+                meaningful user experiences.
+              </p>
+            </div>
+          </div>
+
+          <p className="mt-5 text-sm text-cyan-100/80">
+            Tip: click the floating data nodes to trigger musical notes in the field.
+          </p>
         </motion.div>
 
         <motion.div
@@ -114,10 +156,10 @@ export default function IllusionHero() {
           <div className="rounded-[1.5rem] border border-white/10 bg-slate-950/70 p-4">
             <div className="mb-3 flex items-center justify-between px-2">
               <span className="text-xs font-semibold uppercase tracking-[0.25em] text-cyan-200">
-                3D Data Core
+                Data Field
               </span>
               <span className="rounded-full bg-cyan-300/15 px-3 py-1 text-xs text-cyan-100">
-                Interactive
+                Interactive 3D
               </span>
             </div>
 
@@ -125,16 +167,16 @@ export default function IllusionHero() {
 
             <div className="grid grid-cols-3 gap-3 px-2 pb-2">
               <div className="rounded-2xl bg-white/5 p-3 text-center">
-                <p className="text-lg font-bold text-white">ML</p>
-                <p className="text-xs text-slate-400">Models</p>
+                <p className="text-lg font-bold text-white">Signals</p>
+                <p className="text-xs text-slate-400">Raw Input</p>
               </div>
               <div className="rounded-2xl bg-white/5 p-3 text-center">
-                <p className="text-lg font-bold text-white">BI</p>
-                <p className="text-xs text-slate-400">Insights</p>
+                <p className="text-lg font-bold text-white">Systems</p>
+                <p className="text-xs text-slate-400">Intelligence</p>
               </div>
               <div className="rounded-2xl bg-white/5 p-3 text-center">
-                <p className="text-lg font-bold text-white">AI</p>
-                <p className="text-xs text-slate-400">Systems</p>
+                <p className="text-lg font-bold text-white">Stories</p>
+                <p className="text-xs text-slate-400">Impact</p>
               </div>
             </div>
           </div>

@@ -1,5 +1,18 @@
 import type { Metadata } from "next";
+import { Manrope, Outfit } from "next/font/google";
 import "./globals.css";
+
+const manrope = Manrope({
+  subsets: ["latin"],
+  variable: "--font-body",
+  display: "swap",
+});
+
+const outfit = Outfit({
+  subsets: ["latin"],
+  variable: "--font-display",
+  display: "swap",
+});
 
 export const metadata: Metadata = {
   title: "Ameer Hamza | Data Scientist Portfolio",
@@ -14,7 +27,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body className={`${manrope.variable} ${outfit.variable}`}>
+        {children}
+      </body>
     </html>
   );
 }

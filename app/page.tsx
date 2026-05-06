@@ -29,7 +29,6 @@ export default function Home() {
       <Experience />
       <Contact />
       <Footer />
-      <AmbientSound />
     </main>
   );
 }
