@@ -10,13 +10,17 @@ export default function SectionTitle({
   description,
 }: SectionTitleProps) {
   return (
-    <div className="mb-10">
-      <p className="mb-3 text-sm font-semibold uppercase tracking-[0.3em] text-cyan-300">
+    <div className="section-title-panel mb-10">
+      <p className="mb-3 text-sm font-bold uppercase tracking-[0.3em] text-cyan-200">
         {eyebrow}
       </p>
-      <h2 className="text-3xl font-bold text-white md:text-4xl">{title}</h2>
+
+      <h2 className="text-3xl font-black text-white md:text-4xl">
+        {title}
+      </h2>
+
       {description ? (
-        <p className="mt-4 max-w-3xl text-base leading-7 text-slate-300">
+        <p className="mt-4 max-w-3xl text-base font-medium leading-7 text-blue-50/85">
           {description}
         </p>
       ) : null}

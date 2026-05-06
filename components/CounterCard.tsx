@@ -19,7 +19,7 @@ export default function CounterCard({
 
   useEffect(() => {
     const controls = animate(count, value, {
-      duration: 1.8,
+      duration: 1.4,
       ease: "easeOut",
     });
 
@@ -27,12 +27,13 @@ export default function CounterCard({
   }, [count, value]);
 
   return (
-    <div className="glass-card royal-glow rounded-3xl p-5 text-center">
+    <div className="rounded-3xl border border-white/15 bg-white/10 p-5 text-center shadow-lg shadow-blue-950/10 backdrop-blur-md">
       <p className="text-3xl font-extrabold text-white">
         <motion.span>{rounded}</motion.span>
         {suffix}
       </p>
-      <p className="mt-2 text-sm text-slate-300">{label}</p>
+
+      <p className="mt-2 text-sm font-semibold text-blue-50/80">{label}</p>
     </div>
   );
 }
