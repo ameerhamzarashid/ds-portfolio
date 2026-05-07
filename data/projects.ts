@@ -30,6 +30,25 @@ export const projects = [
       "Demonstrates advanced research, simulation, federated learning, reinforcement learning and system-level thinking.",
   },
   {
+  title: "SkillLens AI",
+  category: "Generative AI",
+  description:
+    "An AI-powered career intelligence platform designed to analyse user skills, identify gaps against target roles, and recommend personalised learning paths using modern AI workflows.",
+  tags: [
+    "Next.js",
+    "TypeScript",
+    "Python",
+    "FastAPI",
+    "Docker",
+    "Generative AI",
+    "Career Intelligence",
+  ],
+  github: "https://github.com/ameerhamzarashid/skilllens-ai",
+  demo: "",
+  impact:
+    "Shows product thinking, full-stack development, AI-assisted skill gap analysis, career recommendation logic and deployment-focused architecture.",
+  },
+  {
     title: "AI Race Engineer",
     category: "Data Analytics",
     description:

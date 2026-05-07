@@ -1,7 +1,5 @@
 "use client";
 
-import { motion, useScroll, useTransform } from "framer-motion";
-import { useRef } from "react";
 import ScrollReveal from "./ScrollReveal";
 
 const storySteps = [
@@ -28,17 +26,8 @@ const storySteps = [
 ];
 
 export default function StoryJourney() {
-  const sectionRef = useRef<HTMLElement | null>(null);
-
-  const { scrollYProgress } = useScroll({
-    target: sectionRef,
-    offset: ["start end", "end start"],
-  });
-
-  const lineScale = useTransform(scrollYProgress, [0.15, 0.85], [0, 1]);
-
   return (
-    <section ref={sectionRef} id="journey" className="relative px-5 py-28">
+    <section id="journey" className="relative px-5 py-28">
       <div className="mx-auto max-w-7xl">
         <ScrollReveal>
           <div className="section-title-panel mb-16 max-w-4xl">
@@ -57,38 +46,24 @@ export default function StoryJourney() {
           </div>
         </ScrollReveal>
 
-        <div className="relative grid gap-8 md:grid-cols-[220px_1fr]">
-          <div className="relative hidden md:block">
-            <div className="absolute left-8 top-0 h-full w-px bg-white/15" />
-            <motion.div
-              style={{ scaleY: lineScale, transformOrigin: "top" }}
-              className="absolute left-8 top-0 h-full w-px bg-gradient-to-b from-white via-cyan-200 to-transparent"
-            />
-          </div>
+        <div className="grid gap-6 md:grid-cols-4">
+          {storySteps.map((step, index) => (
+            <ScrollReveal key={step.title} delay={index * 0.04}>
+              <div className="glass-card h-full rounded-[2rem] p-7">
+                <p className="font-display text-5xl font-black text-cyan-100/35">
+                  {step.number}
+                </p>
 
-          <div className="space-y-6">
-            {storySteps.map((step, index) => (
-              <ScrollReveal key={step.title} delay={index * 0.05}>
-                <div className="glass-card rounded-[2rem] p-7">
-                  <div className="flex flex-col gap-4 md:flex-row md:items-start">
-                    <p className="font-display text-5xl font-black text-cyan-100/35">
-                      {step.number}
-                    </p>
+                <h3 className="mt-4 text-3xl font-black text-white">
+                  {step.title}
+                </h3>
 
-                    <div>
-                      <h3 className="text-3xl font-black text-white">
-                        {step.title}
-                      </h3>
-
-                      <p className="mt-3 max-w-3xl text-base leading-8 text-blue-50/85">
-                        {step.text}
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </ScrollReveal>
-            ))}
-          </div>
+                <p className="mt-4 text-base leading-8 text-blue-50/85">
+                  {step.text}
+                </p>
+              </div>
+            </ScrollReveal>
+          ))}
         </div>
       </div>
     </section>

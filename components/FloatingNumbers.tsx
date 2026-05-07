@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 
 type FloatingItem = {
@@ -10,6 +10,7 @@ type FloatingItem = {
   freq: number;
   driftX: number;
   driftY: number;
+  duration: number;
 };
 
 type Burst = {
@@ -19,20 +20,39 @@ type Burst = {
 };
 
 const floatingItems: FloatingItem[] = [
-  { text: "0.98", x: 8, y: 18, freq: 261.63, driftX: 6, driftY: -12 },
-  { text: "AI", x: 72, y: 12, freq: 293.66, driftX: -8, driftY: 10 },
-  { text: "SQL", x: 18, y: 45, freq: 329.63, driftX: 7, driftY: -8 },
-  { text: "ML", x: 82, y: 38, freq: 349.23, driftX: -8, driftY: 8 },
-  { text: "RAG", x: 12, y: 72, freq: 392.0, driftX: 6, driftY: -10 },
-  { text: "CNN", x: 42, y: 22, freq: 493.88, driftX: 8, driftY: -8 },
-  { text: "6G", x: 28, y: 82, freq: 587.33, driftX: 8, driftY: -6 },
-  { text: "MLOps", x: 56, y: 48, freq: 659.25, driftX: -6, driftY: 6 },
-  { text: "BI", x: 6, y: 35, freq: 880.0, driftX: 7, driftY: -6 },
+  { text: "0.98", x: 8, y: 18, freq: 261.63, driftX: 18, driftY: -20, duration: 8 },
+  { text: "AI", x: 72, y: 12, freq: 293.66, driftX: -22, driftY: 18, duration: 9 },
+  { text: "SQL", x: 18, y: 45, freq: 329.63, driftX: 20, driftY: -14, duration: 10 },
+  { text: "ML", x: 82, y: 38, freq: 349.23, driftX: -18, driftY: 16, duration: 8.5 },
+  { text: "RAG", x: 12, y: 72, freq: 392.0, driftX: 22, driftY: -18, duration: 11 },
+  { text: "CNN", x: 42, y: 22, freq: 493.88, driftX: 16, driftY: -20, duration: 9.5 },
+  { text: "6G", x: 28, y: 82, freq: 587.33, driftX: 24, driftY: -14, duration: 10.5 },
+  { text: "MLOps", x: 56, y: 48, freq: 659.25, driftX: -18, driftY: 18, duration: 12 },
+  { text: "BI", x: 6, y: 35, freq: 880.0, driftX: 20, driftY: -12, duration: 9 },
+  { text: "DQN", x: 88, y: 70, freq: 523.25, driftX: -24, driftY: -18, duration: 11.5 },
 ];
 
 export default function FloatingNumbers() {
-  const [bursts, setBursts] = useState<Burst[]>([]);
+  const wrapperRef = useRef<HTMLDivElement | null>(null);
   const audioContextRef = useRef<AudioContext | null>(null);
+
+  const [isVisible, setIsVisible] = useState(true);
+  const [bursts, setBursts] = useState<Burst[]>([]);
+
+  useEffect(() => {
+    if (!wrapperRef.current) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsVisible(entry.isIntersecting);
+      },
+      { threshold: 0.05 },
+    );
+
+    observer.observe(wrapperRef.current);
+
+    return () => observer.disconnect();
+  }, []);
 
   const getAudioContext = () => {
     if (typeof window === "undefined") return null;
@@ -63,21 +83,22 @@ export default function FloatingNumbers() {
     if (!ctx) return;
 
     const now = ctx.currentTime;
-    const osc = ctx.createOscillator();
+    const oscillator = ctx.createOscillator();
     const gain = ctx.createGain();
 
-    osc.type = "sine";
-    osc.frequency.setValueAtTime(frequency, now);
+    oscillator.type = "sine";
+    oscillator.frequency.setValueAtTime(frequency, now);
+    oscillator.frequency.exponentialRampToValueAtTime(frequency * 1.12, now + 0.16);
 
     gain.gain.setValueAtTime(0.0001, now);
-    gain.gain.exponentialRampToValueAtTime(0.055, now + 0.02);
+    gain.gain.exponentialRampToValueAtTime(0.05, now + 0.02);
     gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.45);
 
-    osc.connect(gain);
+    oscillator.connect(gain);
     gain.connect(ctx.destination);
 
-    osc.start(now);
-    osc.stop(now + 0.46);
+    oscillator.start(now);
+    oscillator.stop(now + 0.48);
   };
 
   const handleClick = (x: number, y: number, freq: number) => {
@@ -85,15 +106,15 @@ export default function FloatingNumbers() {
 
     const id = Date.now();
 
-    setBursts((prev) => [...prev, { id, x, y }]);
+    setBursts((previous) => [...previous, { id, x, y }]);
 
     window.setTimeout(() => {
-      setBursts((prev) => prev.filter((burst) => burst.id !== id));
+      setBursts((previous) => previous.filter((burst) => burst.id !== id));
     }, 900);
   };
 
   return (
-    <div className="floating-stage">
+    <div ref={wrapperRef} className="floating-stage">
       {floatingItems.map((item, index) => (
         <motion.button
           key={`${item.text}-${index}`}
@@ -104,19 +125,47 @@ export default function FloatingNumbers() {
             left: `${item.x}%`,
             top: `${item.y}%`,
           }}
-          initial={{ opacity: 0, scale: 0.94 }}
-          animate={{
-            opacity: 1,
-            x: [0, item.driftX, 0],
-            y: [0, item.driftY, 0],
-          }}
+          initial={{ opacity: 0, scale: 0.92 }}
+          animate={
+            isVisible
+              ? {
+                  opacity: 1,
+                  scale: 1,
+                  x: [0, item.driftX, item.driftX * 0.45, 0],
+                  y: [0, item.driftY, item.driftY * -0.25, 0],
+                  rotate: [0, 2, -2, 0],
+                }
+              : {
+                  opacity: 0.25,
+                  scale: 0.95,
+                  x: 0,
+                  y: 0,
+                  rotate: 0,
+                }
+          }
           transition={{
-            duration: 6 + index * 0.2,
-            repeat: Infinity,
-            ease: "easeInOut",
-            delay: index * 0.08,
+            opacity: { duration: 0.35 },
+            scale: { duration: 0.35 },
+            x: {
+              duration: item.duration,
+              repeat: Infinity,
+              ease: "easeInOut",
+              delay: index * 0.12,
+            },
+            y: {
+              duration: item.duration,
+              repeat: Infinity,
+              ease: "easeInOut",
+              delay: index * 0.12,
+            },
+            rotate: {
+              duration: item.duration,
+              repeat: Infinity,
+              ease: "easeInOut",
+              delay: index * 0.12,
+            },
           }}
-          whileHover={{ scale: 1.06 }}
+          whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.96 }}
         >
           {item.text}
