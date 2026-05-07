@@ -302,3 +302,13 @@ body {
     transform: translateY(-14px) scale(0.98);
   }
 }
+.train-depth-card {
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+}
+
+.train-depth-card:hover {
+  box-shadow:
+    0 28px 90px rgba(2, 6, 23, 0.38),
+    0 0 45px rgba(45, 212, 191, 0.14);
+}
