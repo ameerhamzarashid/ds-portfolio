@@ -4,10 +4,10 @@ import { motion } from "framer-motion";
 
 const navItems = [
   { label: "Journey", href: "#journey" },
-  { label: "Command", href: "#command-centre" },
+  { label: "Skills", href: "#skills" },
   { label: "Visuals", href: "#data-visuals" },
   { label: "Projects", href: "#projects" },
-  { label: "Cases", href: "#case-studies" },
+  { label: "Experience", href: "#experience" },
   { label: "Contact", href: "#contact" },
 ];
 

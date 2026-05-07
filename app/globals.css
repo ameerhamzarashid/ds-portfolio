@@ -266,3 +266,13 @@ body {
     transform: translate3d(0, -45px, 0) scale(1.15);
   }
 }
+
+.journey-content-layer {
+  position: relative;
+  z-index: 10;
+}
+
+.train-depth-card {
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+}

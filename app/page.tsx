@@ -12,11 +12,15 @@ import Experience from "@/components/Experience";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
 import ThemeBackground from "@/components/ThemeBackground";
+import JourneyScene3D from "@/components/JourneyScene3D";
+import JourneyOverlay from "@/components/JourneyOverlay";
 
 export default function Home() {
   return (
     <main>
       <ThemeBackground />
+      <JourneyScene3D />
+      <JourneyOverlay />
       <Navbar />
       <IllusionHero />
       <TechMarquee />
