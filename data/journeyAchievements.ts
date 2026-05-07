@@ -1,0 +1,51 @@
+export const journeyAchievements = [
+  {
+    id: "home",
+    badge: "Signal Reader",
+    station: "Signal Valley",
+    description: "Entered the data journey and discovered the first signal.",
+    icon: "✦",
+  },
+  {
+    id: "journey",
+    badge: "Pattern Finder",
+    station: "Pattern Bridge",
+    description: "Moved from scattered information into structured thinking.",
+    icon: "⌁",
+  },
+  {
+    id: "command-centre",
+    badge: "Skill Navigator",
+    station: "Skill Terminal",
+    description: "Explored the tools and capabilities behind the portfolio.",
+    icon: "◈",
+  },
+  {
+    id: "data-visuals",
+    badge: "Data Observer",
+    station: "Data Observatory",
+    description: "Unlocked visual intelligence through charts and analytics.",
+    icon: "◌",
+  },
+  {
+    id: "projects",
+    badge: "Model Builder",
+    station: "Model Yard",
+    description: "Reached the project zone where technical work becomes proof.",
+    icon: "⬡",
+  },
+  {
+    id: "experience",
+    badge: "Impact Engineer",
+    station: "Experience Bridge",
+    description: "Connected technical skill with professional experience.",
+    icon: "◆",
+  },
+  {
+    id: "contact",
+    badge: "Journey Complete",
+    station: "Contact Harbor",
+    description: "Completed the portfolio route and reached the final station.",
+    icon: "◎",
+  },
+];

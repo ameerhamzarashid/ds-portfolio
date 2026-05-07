@@ -276,3 +276,29 @@ body {
   transform-style: preserve-3d;
   backface-visibility: hidden;
 }
+
+.animate-achievement {
+  animation: achievementPop 3.2s ease-in-out forwards;
+}
+
+@keyframes achievementPop {
+  0% {
+    opacity: 0;
+    transform: translateY(-18px) scale(0.96);
+  }
+
+  12% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+
+  82% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translateY(-14px) scale(0.98);
+  }
+}

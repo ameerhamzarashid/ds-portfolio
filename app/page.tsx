@@ -14,6 +14,7 @@ import Footer from "@/components/Footer";
 import ThemeBackground from "@/components/ThemeBackground";
 import JourneyScene3D from "@/components/JourneyScene3D";
 import JourneyOverlay from "@/components/JourneyOverlay";
+import JourneyGamification from "@/components/JourneyGamification";
 
 export default function Home() {
   return (
@@ -21,6 +22,7 @@ export default function Home() {
       <ThemeBackground />
       <JourneyScene3D />
       <JourneyOverlay />
+      <JourneyGamification />
       <Navbar />
       <IllusionHero />
       <TechMarquee />
