@@ -1,109 +1,148 @@
 "use client";
 
 import { useState } from "react";
-import { projects, projectCategories, ProjectCategory } from "@/data/projects";
+import Link from "next/link";
 import SectionTitle from "./SectionTitle";
-import { FaGithub } from "react-icons/fa";
-import { FiExternalLink } from "react-icons/fi";
+import ScrollReveal from "./ScrollReveal";
+import { projects, projectCategories } from "@/data/projects";
+
+type ProjectItem = {
+  title: string;
+  category: string;
+  description: string;
+  tags: string[];
+  github: string;
+  demo?: string;
+  impact?: string;
+};
+
+const caseStudySlugMap: Record<string, string> = {
+  "SkillLens AI": "skilllens-ai",
+  "AI Race Engineer": "ai-race-engineer",
+  "Communication-Efficient Federated Learning for 6G MEC":
+    "6g-federated-learning",
+  "Alzheimer Detection Using Deep Learning": "alzheimer-detection",
+  "Fight Anomaly Detection Web App": "fight-anomaly-detection",
+};
 
 export default function Projects() {
-  const [activeCategory, setActiveCategory] =
-    useState<ProjectCategory>("All");
+  const [activeCategory, setActiveCategory] = useState("All");
+
+  const typedProjects = projects as ProjectItem[];
+  const typedCategories = projectCategories as string[];
 
   const filteredProjects =
     activeCategory === "All"
-      ? projects
-      : projects.filter((project) => project.category === activeCategory);
+      ? typedProjects
+      : typedProjects.filter((project) => project.category === activeCategory);
 
   return (
-    <section id="projects" className="px-5 py-24">
+    <section id="projects" className="px-5 py-28">
       <div className="mx-auto max-w-7xl">
-        <SectionTitle
-          eyebrow="Projects"
-          title="Featured work with dynamic filtering"
-          description="Explore projects by category across machine learning, analytics, computer vision, research and deployment."
-        />
+        <ScrollReveal>
+          <SectionTitle
+            eyebrow="Projects"
+            title="Selected work across data, AI and analytics"
+            description="A collection of projects showing practical work across machine learning, analytics, computer vision, AI systems, research and deployment-focused development."
+          />
+        </ScrollReveal>
 
-        <div className="mb-8 flex flex-wrap gap-3">
-          {projectCategories.map((category) => (
-            <button
-              key={category}
-              onClick={() => setActiveCategory(category)}
-              className={`rounded-full px-5 py-2 text-sm font-semibold transition ${
-                activeCategory === category
-                  ? "bg-cyan-300 text-slate-950"
-                  : "border border-white/10 bg-white/5 text-slate-300 hover:border-cyan-300 hover:text-cyan-300"
-              }`}
-            >
-              {category}
-            </button>
-          ))}
-        </div>
+        <ScrollReveal delay={0.05}>
+          <div className="mb-10 flex flex-wrap gap-3">
+            {typedCategories.map((category) => (
+              <button
+                key={category}
+                onClick={() => setActiveCategory(category)}
+                className={`rounded-full border px-5 py-2 text-sm font-bold transition ${
+                  activeCategory === category
+                    ? "border-orange-400 bg-orange-500 text-white"
+                    : "border-orange-300/15 bg-black/25 text-stone-300 hover:bg-orange-500/15 hover:text-orange-100"
+                }`}
+              >
+                {category}
+              </button>
+            ))}
+          </div>
+        </ScrollReveal>
 
         <div className="grid gap-6 md:grid-cols-2">
-          {filteredProjects.map((project) => (
-            <article
-              key={project.title}
-              className="glass-card group rounded-3xl p-6 transition hover:-translate-y-1 hover:border-cyan-300/50"
-            >
-              <div className="mb-4 flex items-center justify-between gap-3">
-                <span className="rounded-full bg-cyan-300/10 px-3 py-1 text-xs font-semibold text-cyan-200">
-                  {project.category}
-                </span>
-                <span className="text-xs text-slate-500">
-                  {project.tags.length} tools
-                </span>
-              </div>
+          {filteredProjects.map((project, index) => {
+            const slug = caseStudySlugMap[project.title];
 
-              <h3 className="text-2xl font-bold text-white">{project.title}</h3>
+            return (
+              <ScrollReveal key={project.title} delay={index * 0.04}>
+                <article className="glass-card group flex h-full flex-col rounded-[2rem] p-7 transition hover:-translate-y-1">
+                  <div className="mb-5 flex items-start justify-between gap-4">
+                    <div>
+                      <p className="text-xs font-black uppercase tracking-[0.28em] text-orange-300">
+                        {project.category}
+                      </p>
 
-              <p className="mt-4 leading-7 text-slate-300">
-                {project.description}
-              </p>
+                      <h3 className="mt-3 text-3xl font-black leading-tight text-orange-50">
+                        {project.title}
+                      </h3>
+                    </div>
 
-              <div className="mt-5 rounded-2xl border border-white/10 bg-white/5 p-4">
-                <p className="text-sm font-semibold text-cyan-300">
-                  Portfolio impact
-                </p>
-                <p className="mt-2 text-sm leading-6 text-slate-300">
-                  {project.impact}
-                </p>
-              </div>
+                    <span className="rounded-full border border-orange-300/15 bg-orange-500/10 px-3 py-1 text-xs font-bold text-orange-200">
+                      0{index + 1}
+                    </span>
+                  </div>
 
-              <div className="mt-5 flex flex-wrap gap-2">
-                {project.tags.map((tag) => (
-                  <span
-                    key={tag}
-                    className="rounded-full bg-white/5 px-3 py-1 text-xs text-slate-300"
-                  >
-                    {tag}
-                  </span>
-                ))}
-              </div>
+                  <p className="text-base leading-8 text-stone-300">
+                    {project.description}
+                  </p>
 
-              <div className="mt-6 flex gap-4">
-                <a
-                  href={project.github}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="flex items-center gap-2 text-sm font-semibold text-cyan-300 hover:text-cyan-200"
-                >
-                  <FaGithub /> GitHub
-                </a>
+                  {project.impact ? (
+                    <p className="mt-4 rounded-2xl border border-orange-300/10 bg-black/20 p-4 text-sm font-semibold leading-6 text-stone-300">
+                      {project.impact}
+                    </p>
+                  ) : null}
 
-                {project.demo ? (
-                  <a
-                    href={project.demo}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="flex items-center gap-2 text-sm font-semibold text-purple-300 hover:text-purple-200"
-                  >
-                    <FiExternalLink /> Live Demo
-                  </a>
-                ) : null}
-              </div>
-            </article>
-          ))}
+                  <div className="mt-6 flex flex-wrap gap-2">
+                    {project.tags.map((tag) => (
+                      <span
+                        key={tag}
+                        className="rounded-full border border-orange-300/15 bg-black/25 px-3 py-1 text-xs font-semibold text-orange-100"
+                      >
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+
+                  <div className="mt-auto flex flex-wrap gap-3 pt-7">
+                    {slug ? (
+                      <Link
+                        href={`/projects/${slug}`}
+                        className="rounded-full bg-orange-500 px-5 py-3 text-sm font-black text-white transition hover:bg-amber-500"
+                      >
+                        View Case Study
+                      </Link>
+                    ) : null}
+
+                    <a
+                      href={project.github}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="rounded-full border border-orange-300/20 bg-white/10 px-5 py-3 text-sm font-black text-orange-50 transition hover:bg-orange-100 hover:text-black"
+                    >
+                      GitHub
+                    </a>
+
+                    {project.demo ? (
+                      <a
+                        href={project.demo}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="rounded-full border border-orange-300/20 bg-black/25 px-5 py-3 text-sm font-black text-orange-100 transition hover:bg-orange-500 hover:text-white"
+                      >
+                        Live Demo
+                      </a>
+                    ) : null}
+                  </div>
+                </article>
+              </ScrollReveal>
+            );
+          })}
         </div>
       </div>
     </section>
