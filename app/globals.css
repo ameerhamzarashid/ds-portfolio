@@ -277,3 +277,16 @@ body {
     scroll-behavior: auto !important;
   }
 }
+main {
+  overflow-x: clip;
+}
+
+section {
+  transform-style: preserve-3d;
+}
+
+@media (max-width: 768px) {
+  section {
+    transform-style: flat;
+  }
+}
