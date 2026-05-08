@@ -303,3 +303,37 @@ canvas {
     pointer-events: none;
   }
 }
+canvas {
+  touch-action: pan-y;
+}
+
+main {
+  overflow-x: clip;
+}
+
+@media (max-width: 1023px) {
+  .floating-stage {
+    pointer-events: none;
+  }
+
+  .number-node {
+    pointer-events: none;
+  }
+
+  section {
+    transform-style: flat;
+  }
+}
+
+@media (max-width: 640px) {
+  .section-title-panel {
+    padding: 1rem;
+    border-radius: 1.25rem;
+  }
+
+  .section-title-panel h1,
+  .section-title-panel h2 {
+    font-size: 2.25rem;
+    line-height: 1.08;
+  }
+}

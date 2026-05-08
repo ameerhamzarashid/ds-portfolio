@@ -37,7 +37,7 @@ export default function Projects() {
       : typedProjects.filter((project) => project.category === activeCategory);
 
   return (
-    <section id="projects" className="px-5 py-28">
+    <section id="projects" className="px-5 py-20 md:py-28">
       <div className="mx-auto max-w-7xl">
         <ScrollReveal>
           <SectionTitle
@@ -48,12 +48,12 @@ export default function Projects() {
         </ScrollReveal>
 
         <ScrollReveal delay={0.05}>
-          <div className="mb-10 flex flex-wrap gap-3">
+          <div className="mb-10 flex gap-3 overflow-x-auto pb-3 md:flex-wrap md:overflow-visible md:pb-0">
             {typedCategories.map((category) => (
               <button
                 key={category}
                 onClick={() => setActiveCategory(category)}
-                className={`rounded-full border px-5 py-2 text-sm font-bold transition ${
+                className={`shrink-0 rounded-full border px-5 py-2 text-sm font-bold transition ${
                   activeCategory === category
                     ? "border-orange-400 bg-orange-500 text-white"
                     : "border-orange-300/15 bg-black/25 text-stone-300 hover:bg-orange-500/15 hover:text-orange-100"
@@ -65,30 +65,30 @@ export default function Projects() {
           </div>
         </ScrollReveal>
 
-        <div className="grid gap-6 md:grid-cols-2">
+        <div className="grid gap-5 md:grid-cols-2 md:gap-6">
           {filteredProjects.map((project, index) => {
             const slug = caseStudySlugMap[project.title];
 
             return (
               <ScrollReveal key={project.title} delay={index * 0.04}>
-                <article className="glass-card group flex h-full flex-col rounded-[2rem] p-7 transition hover:-translate-y-1">
-                  <div className="mb-5 flex items-start justify-between gap-4">
+                <article className="glass-card group flex h-full flex-col rounded-[2rem] p-5 transition hover:-translate-y-1 md:p-7">
+                  <div className="mb-5 flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
                     <div>
-                      <p className="text-xs font-black uppercase tracking-[0.28em] text-orange-300">
+                      <p className="text-xs font-black uppercase tracking-[0.24em] text-orange-300 md:tracking-[0.28em]">
                         {project.category}
                       </p>
 
-                      <h3 className="mt-3 text-3xl font-black leading-tight text-orange-50">
+                      <h3 className="mt-3 text-2xl font-black leading-tight text-orange-50 md:text-3xl">
                         {project.title}
                       </h3>
                     </div>
 
-                    <span className="rounded-full border border-orange-300/15 bg-orange-500/10 px-3 py-1 text-xs font-bold text-orange-200">
+                    <span className="w-fit rounded-full border border-orange-300/15 bg-orange-500/10 px-3 py-1 text-xs font-bold text-orange-200">
                       0{index + 1}
                     </span>
                   </div>
 
-                  <p className="text-base leading-8 text-stone-300">
+                  <p className="text-sm leading-7 text-stone-300 md:text-base md:leading-8">
                     {project.description}
                   </p>
 
@@ -109,11 +109,11 @@ export default function Projects() {
                     ))}
                   </div>
 
-                  <div className="mt-auto flex flex-wrap gap-3 pt-7">
+                  <div className="mt-auto grid gap-3 pt-7 sm:flex sm:flex-wrap">
                     {slug ? (
                       <Link
                         href={`/projects/${slug}`}
-                        className="rounded-full bg-orange-500 px-5 py-3 text-sm font-black text-white transition hover:bg-amber-500"
+                        className="rounded-full bg-orange-500 px-5 py-3 text-center text-sm font-black text-white transition hover:bg-amber-500"
                       >
                         View Case Study
                       </Link>
@@ -123,7 +123,7 @@ export default function Projects() {
                       href={project.github}
                       target="_blank"
                       rel="noreferrer"
-                      className="rounded-full border border-orange-300/20 bg-white/10 px-5 py-3 text-sm font-black text-orange-50 transition hover:bg-orange-100 hover:text-black"
+                      className="rounded-full border border-orange-300/20 bg-white/10 px-5 py-3 text-center text-sm font-black text-orange-50 transition hover:bg-orange-100 hover:text-black"
                     >
                       GitHub
                     </a>
@@ -133,7 +133,7 @@ export default function Projects() {
                         href={project.demo}
                         target="_blank"
                         rel="noreferrer"
-                        className="rounded-full border border-orange-300/20 bg-black/25 px-5 py-3 text-sm font-black text-orange-100 transition hover:bg-orange-500 hover:text-white"
+                        className="rounded-full border border-orange-300/20 bg-black/25 px-5 py-3 text-center text-sm font-black text-orange-100 transition hover:bg-orange-500 hover:text-white"
                       >
                         Live Demo
                       </a>

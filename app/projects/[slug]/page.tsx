@@ -45,7 +45,7 @@ export default async function ProjectCaseStudyPage({
   }
 
   return (
-    <main className="min-h-screen px-5 pb-24 pt-32">
+    <main className="min-h-screen px-5 pb-20 pt-28 md:pb-24 md:pt-32">
       <section className="mx-auto max-w-6xl">
         <Link
           href="/#projects"
@@ -54,17 +54,17 @@ export default async function ProjectCaseStudyPage({
           ← Back to Projects
         </Link>
 
-        <div className="mt-10 grid gap-8 lg:grid-cols-[1.1fr_0.9fr]">
-          <div className="hero-panel rounded-[2.5rem] p-7 md:p-10">
-            <p className="text-sm font-black uppercase tracking-[0.32em] text-orange-300">
+        <div className="mt-8 grid gap-6 lg:mt-10 lg:grid-cols-[1.1fr_0.9fr] lg:gap-8">
+          <div className="hero-panel rounded-[2rem] p-6 md:rounded-[2.5rem] md:p-10">
+            <p className="text-xs font-black uppercase tracking-[0.24em] text-orange-300 md:text-sm md:tracking-[0.32em]">
               {project.category}
             </p>
 
-            <h1 className="mt-5 text-5xl font-black leading-tight text-orange-50 md:text-7xl">
+            <h1 className="mt-5 text-4xl font-black leading-tight text-orange-50 md:text-7xl">
               {project.title}
             </h1>
 
-            <p className="mt-6 max-w-3xl text-lg leading-8 text-stone-300">
+            <p className="mt-6 max-w-3xl text-base leading-8 text-stone-300 md:text-lg">
               {project.summary}
             </p>
 
@@ -79,12 +79,12 @@ export default async function ProjectCaseStudyPage({
               ))}
             </div>
 
-            <div className="mt-10 flex flex-wrap gap-4">
+            <div className="mt-10 grid gap-3 sm:flex sm:flex-wrap">
               <a
                 href={project.github}
                 target="_blank"
                 rel="noreferrer"
-                className="rounded-full bg-orange-500 px-6 py-3 text-sm font-black text-white transition hover:bg-amber-500"
+                className="rounded-full bg-orange-500 px-6 py-3 text-center text-sm font-black text-white transition hover:bg-amber-500"
               >
                 View GitHub
               </a>
@@ -94,7 +94,7 @@ export default async function ProjectCaseStudyPage({
                   href={project.demo}
                   target="_blank"
                   rel="noreferrer"
-                  className="rounded-full border border-orange-300/20 bg-white/10 px-6 py-3 text-sm font-black text-orange-50 transition hover:bg-orange-100 hover:text-black"
+                  className="rounded-full border border-orange-300/20 bg-white/10 px-6 py-3 text-center text-sm font-black text-orange-50 transition hover:bg-orange-100 hover:text-black"
                 >
                   Live Demo
                 </a>
@@ -102,8 +102,8 @@ export default async function ProjectCaseStudyPage({
             </div>
           </div>
 
-          <div className="deep-glass rounded-[2.5rem] p-7 md:p-8">
-            <p className="text-sm font-black uppercase tracking-[0.3em] text-orange-300">
+          <div className="deep-glass rounded-[2rem] p-6 md:rounded-[2.5rem] md:p-8">
+            <p className="text-xs font-black uppercase tracking-[0.28em] text-orange-300 md:text-sm md:tracking-[0.3em]">
               Project Snapshot
             </p>
 
@@ -134,29 +134,29 @@ export default async function ProjectCaseStudyPage({
 
         <ProjectVisualGallery visuals={project.visuals} />
 
-        <section className="mt-10 grid gap-8 lg:grid-cols-2">
-          <div className="glass-card rounded-[2.5rem] p-7 md:p-8">
-            <p className="text-sm font-black uppercase tracking-[0.3em] text-orange-300">
+        <section className="mt-8 grid gap-6 lg:mt-10 lg:grid-cols-2 lg:gap-8">
+          <div className="glass-card rounded-[2rem] p-6 md:rounded-[2.5rem] md:p-8">
+            <p className="text-xs font-black uppercase tracking-[0.28em] text-orange-300 md:text-sm md:tracking-[0.3em]">
               Problem
             </p>
-            <p className="mt-5 text-lg leading-8 text-stone-300">
+            <p className="mt-5 text-base leading-8 text-stone-300 md:text-lg">
               {project.problem}
             </p>
           </div>
 
-          <div className="glass-card rounded-[2.5rem] p-7 md:p-8">
-            <p className="text-sm font-black uppercase tracking-[0.3em] text-orange-300">
+          <div className="glass-card rounded-[2rem] p-6 md:rounded-[2.5rem] md:p-8">
+            <p className="text-xs font-black uppercase tracking-[0.28em] text-orange-300 md:text-sm md:tracking-[0.3em]">
               Solution
             </p>
-            <p className="mt-5 text-lg leading-8 text-stone-300">
+            <p className="mt-5 text-base leading-8 text-stone-300 md:text-lg">
               {project.solution}
             </p>
           </div>
         </section>
 
-        <section className="mt-10 grid gap-8 lg:grid-cols-[0.9fr_1.1fr]">
-          <div className="deep-glass rounded-[2.5rem] p-7 md:p-8">
-            <p className="text-sm font-black uppercase tracking-[0.3em] text-orange-300">
+        <section className="mt-8 grid gap-6 lg:mt-10 lg:grid-cols-[0.9fr_1.1fr] lg:gap-8">
+          <div className="deep-glass rounded-[2rem] p-6 md:rounded-[2.5rem] md:p-8">
+            <p className="text-xs font-black uppercase tracking-[0.28em] text-orange-300 md:text-sm md:tracking-[0.3em]">
               Tech Stack
             </p>
 
@@ -172,8 +172,8 @@ export default async function ProjectCaseStudyPage({
             </div>
           </div>
 
-          <div className="glass-card rounded-[2.5rem] p-7 md:p-8">
-            <p className="text-sm font-black uppercase tracking-[0.3em] text-orange-300">
+          <div className="glass-card rounded-[2rem] p-6 md:rounded-[2.5rem] md:p-8">
+            <p className="text-xs font-black uppercase tracking-[0.28em] text-orange-300 md:text-sm md:tracking-[0.3em]">
               Key Features
             </p>
 
@@ -190,9 +190,9 @@ export default async function ProjectCaseStudyPage({
           </div>
         </section>
 
-        <section className="mt-10 grid gap-8 lg:grid-cols-2">
-          <div className="glass-card rounded-[2.5rem] p-7 md:p-8">
-            <p className="text-sm font-black uppercase tracking-[0.3em] text-orange-300">
+        <section className="mt-8 grid gap-6 lg:mt-10 lg:grid-cols-2 lg:gap-8">
+          <div className="glass-card rounded-[2rem] p-6 md:rounded-[2.5rem] md:p-8">
+            <p className="text-xs font-black uppercase tracking-[0.28em] text-orange-300 md:text-sm md:tracking-[0.3em]">
               Workflow
             </p>
 
@@ -214,8 +214,8 @@ export default async function ProjectCaseStudyPage({
             </div>
           </div>
 
-          <div className="glass-card rounded-[2.5rem] p-7 md:p-8">
-            <p className="text-sm font-black uppercase tracking-[0.3em] text-orange-300">
+          <div className="glass-card rounded-[2rem] p-6 md:rounded-[2.5rem] md:p-8">
+            <p className="text-xs font-black uppercase tracking-[0.28em] text-orange-300 md:text-sm md:tracking-[0.3em]">
               Outcomes
             </p>
 
@@ -232,12 +232,12 @@ export default async function ProjectCaseStudyPage({
           </div>
         </section>
 
-        <section className="mt-10 rounded-[2.5rem] border border-orange-300/15 bg-orange-500/10 p-7 md:p-10">
+        <section className="mt-8 rounded-[2rem] border border-orange-300/15 bg-orange-500/10 p-6 md:mt-10 md:rounded-[2.5rem] md:p-10">
           <h2 className="text-3xl font-black text-orange-50 md:text-5xl">
             Want to explore the code?
           </h2>
 
-          <p className="mt-5 max-w-3xl text-lg leading-8 text-stone-300">
+          <p className="mt-5 max-w-3xl text-base leading-8 text-stone-300 md:text-lg">
             View the repository to see the implementation, structure and
             technical direction behind this project.
           </p>
@@ -247,7 +247,7 @@ export default async function ProjectCaseStudyPage({
               href={project.github}
               target="_blank"
               rel="noreferrer"
-              className="rounded-full bg-orange-500 px-7 py-3 text-sm font-black text-white transition hover:bg-amber-500"
+              className="inline-flex rounded-full bg-orange-500 px-7 py-3 text-sm font-black text-white transition hover:bg-amber-500"
             >
               Open GitHub Repository
             </a>
