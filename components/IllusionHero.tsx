@@ -116,13 +116,13 @@ export default function IllusionHero() {
           initial={{ opacity: 0, scale: 0.94, x: 30 }}
           animate={{ opacity: 1, scale: 1, x: 0 }}
           transition={{ duration: 0.9 }}
-          className="relative z-0 flex min-h-[680px] items-center justify-center lg:-mr-8 lg:translate-y-8"
+          className="pointer-events-none relative z-0 flex min-h-[360px] items-center justify-center lg:pointer-events-auto lg:min-h-[680px] lg:-mr-8 lg:translate-y-8"
         >
-          <div className="absolute h-[700px] w-[700px] rounded-full bg-orange-500/12 blur-3xl" />
-          <div className="absolute h-[560px] w-[560px] rounded-full border border-orange-300/15" />
-          <div className="absolute h-[760px] w-[760px] rounded-full border border-amber-200/10" />
+          <div className="absolute h-[360px] w-[360px] rounded-full bg-orange-500/12 blur-3xl lg:h-[700px] lg:w-[700px]" />
+          <div className="absolute h-[300px] w-[300px] rounded-full border border-orange-300/15 lg:h-[560px] lg:w-[560px]" />
+          <div className="absolute h-[430px] w-[430px] rounded-full border border-amber-200/10 lg:h-[760px] lg:w-[760px]" />
 
-          <div className="relative h-[680px] w-full max-w-[740px] cursor-pointer overflow-visible">
+          <div className="relative h-[360px] w-full max-w-[420px] cursor-pointer overflow-visible lg:h-[680px] lg:max-w-[740px]">
             <NeuralOrb3D />
           </div>
         </motion.div>

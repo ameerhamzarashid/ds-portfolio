@@ -290,3 +290,16 @@ section {
     transform-style: flat;
   }
 }
+canvas {
+  touch-action: pan-y;
+}
+
+@media (max-width: 1023px) {
+  .floating-stage {
+    pointer-events: none;
+  }
+
+  .number-node {
+    pointer-events: none;
+  }
+}
