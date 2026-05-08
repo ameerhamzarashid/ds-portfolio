@@ -4,6 +4,7 @@ import {
   getProjectCaseStudy,
   projectCaseStudies,
 } from "@/data/projectCaseStudies";
+import ProjectVisualGallery from "@/components/ProjectVisualGallery";
 
 type ProjectPageProps = {
   params: Promise<{
@@ -33,7 +34,9 @@ export async function generateMetadata({ params }: ProjectPageProps) {
   };
 }
 
-export default async function ProjectCaseStudyPage({ params }: ProjectPageProps) {
+export default async function ProjectCaseStudyPage({
+  params,
+}: ProjectPageProps) {
   const { slug } = await params;
   const project = getProjectCaseStudy(slug);
 
@@ -128,6 +131,8 @@ export default async function ProjectCaseStudyPage({ params }: ProjectPageProps)
             </div>
           </div>
         </div>
+
+        <ProjectVisualGallery visuals={project.visuals} />
 
         <section className="mt-10 grid gap-8 lg:grid-cols-2">
           <div className="glass-card rounded-[2.5rem] p-7 md:p-8">
