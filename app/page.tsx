@@ -2,7 +2,7 @@ import Navbar from "@/components/Navbar";
 import IllusionHero from "@/components/IllusionHero";
 import TechMarquee from "@/components/TechMarquee";
 import Skills from "@/components/Skills";
-import StoryJourney from "@/components/StoryJourney";
+import ApplePortfolioJourney from "@/components/ApplePortfolioJourney";
 import TechCommandCentre from "@/components/TechCommandCentre";
 import DataVisuals from "@/components/DataVisuals";
 import Projects from "@/components/Projects";
@@ -21,7 +21,7 @@ export default function Home() {
       <Navbar />
       <IllusionHero />
       <TechMarquee />
-      <StoryJourney />
+      <ApplePortfolioJourney />
       <Skills />
       <TechCommandCentre />
       <DataVisuals />
