@@ -32,9 +32,9 @@ export default function DataVisuals() {
       <div className="mx-auto max-w-7xl">
         <SectionTitle
           eyebrow="Data Visuals"
-          title="Portfolio shown like a data product"
-          description="A data scientist portfolio should contain visuals. These charts summarise my technical strengths, project coverage and workflow."
-        />
+          title="A snapshot of my technical work"
+          description="These charts give a quick overview of my core skills, project areas and workflow, making it easier to see how my experience connects across analytics, machine learning, AI systems and deployment."
+          />
 
         <div className="grid gap-6 lg:grid-cols-2">
           <div className="glass-card rounded-3xl p-6">

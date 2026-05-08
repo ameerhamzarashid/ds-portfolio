@@ -16,9 +16,9 @@ function createOrbPoints(total: number) {
 
     points.push(
       new THREE.Vector3(
-        Math.cos(theta) * radius * 2.15,
-        y * 2.15,
-        Math.sin(theta) * radius * 2.15,
+        Math.cos(theta) * radius * 2.35,
+        y * 2.35,
+        Math.sin(theta) * radius * 2.35,
       ),
     );
   }
@@ -26,19 +26,25 @@ function createOrbPoints(total: number) {
   return points;
 }
 
-function DataOrb({ active }: { active: boolean }) {
+function DataOrb({
+  active,
+  expanded,
+}: {
+  active: boolean;
+  expanded: boolean;
+}) {
   const groupRef = useRef<THREE.Group>(null);
   const innerRef = useRef<THREE.Mesh>(null);
   const { pointer } = useThree();
 
-  const points = useMemo(() => createOrbPoints(42), []);
+  const points = useMemo(() => createOrbPoints(62), []);
 
   const lineGeometries = useMemo(() => {
-    return points.slice(0, 18).map((point, index) => {
-      const nextPoint = points[(index * 3 + 9) % points.length];
+    return points.slice(0, 28).map((point, index) => {
+      const nextPoint = points[(index * 3 + 11) % points.length];
       const curve = new THREE.CatmullRomCurve3([point, nextPoint]);
 
-      return new THREE.TubeGeometry(curve, 5, 0.0045, 5, false);
+      return new THREE.TubeGeometry(curve, 6, 0.005, 6, false);
     });
   }, [points]);
 
@@ -46,38 +52,75 @@ function DataOrb({ active }: { active: boolean }) {
     if (!active || !groupRef.current) return;
 
     const elapsed = state.clock.elapsedTime;
+    const targetScale = expanded ? 1.12 : 1;
 
-    groupRef.current.rotation.y = elapsed * 0.06 + pointer.x * 0.18;
+    groupRef.current.scale.x = THREE.MathUtils.lerp(
+      groupRef.current.scale.x,
+      targetScale,
+      0.08,
+    );
+    groupRef.current.scale.y = THREE.MathUtils.lerp(
+      groupRef.current.scale.y,
+      targetScale,
+      0.08,
+    );
+    groupRef.current.scale.z = THREE.MathUtils.lerp(
+      groupRef.current.scale.z,
+      targetScale,
+      0.08,
+    );
+
+    groupRef.current.rotation.y =
+      elapsed * (expanded ? 0.11 : 0.07) + pointer.x * 0.28;
+
     groupRef.current.rotation.x =
-      Math.sin(elapsed * 0.14) * 0.06 - pointer.y * 0.12;
+      Math.sin(elapsed * 0.18) * 0.08 - pointer.y * 0.18;
+
+    groupRef.current.position.x = THREE.MathUtils.lerp(
+      groupRef.current.position.x,
+      pointer.x * (expanded ? 0.24 : 0.14),
+      0.04,
+    );
+
+    groupRef.current.position.y = THREE.MathUtils.lerp(
+      groupRef.current.position.y,
+      pointer.y * (expanded ? 0.18 : 0.1),
+      0.04,
+    );
 
     if (innerRef.current) {
-      innerRef.current.scale.setScalar(1 + Math.sin(elapsed * 0.8) * 0.015);
+      innerRef.current.scale.setScalar(
+        1 + Math.sin(elapsed * 1.2) * (expanded ? 0.028 : 0.014),
+      );
     }
   });
 
   return (
     <group ref={groupRef}>
       <mesh>
-        <sphereGeometry args={[1.3, 36, 36]} />
+        <sphereGeometry args={[1.45, 54, 54]} />
         <meshBasicMaterial
-          color="#2563eb"
+          color="#f97316"
           wireframe
           transparent
-          opacity={0.55}
+          opacity={expanded ? 0.78 : 0.66}
         />
       </mesh>
 
       <mesh ref={innerRef}>
-        <sphereGeometry args={[0.78, 32, 32]} />
-        <meshBasicMaterial color="#2dd4bf" transparent opacity={0.16} />
+        <sphereGeometry args={[0.88, 44, 44]} />
+        <meshBasicMaterial
+          color="#fbbf24"
+          transparent
+          opacity={expanded ? 0.26 : 0.18}
+        />
       </mesh>
 
       {points.map((point, index) => (
         <mesh key={index} position={point}>
-          <sphereGeometry args={[index % 7 === 0 ? 0.04 : 0.025, 8, 8]} />
+          <sphereGeometry args={[index % 7 === 0 ? 0.05 : 0.03, 10, 10]} />
           <meshBasicMaterial
-            color={index % 3 === 0 ? "#ffffff" : "#2dd4bf"}
+            color={index % 3 === 0 ? "#fff7ed" : "#f59e0b"}
           />
         </mesh>
       ))}
@@ -85,9 +128,9 @@ function DataOrb({ active }: { active: boolean }) {
       {lineGeometries.map((geometry, index) => (
         <mesh key={`line-${index}`} geometry={geometry}>
           <meshBasicMaterial
-            color={index % 2 === 0 ? "#99f6e4" : "#ffffff"}
+            color={index % 2 === 0 ? "#fbbf24" : "#fff7ed"}
             transparent
-            opacity={0.25}
+            opacity={expanded ? 0.45 : 0.32}
           />
         </mesh>
       ))}
@@ -95,23 +138,33 @@ function DataOrb({ active }: { active: boolean }) {
   );
 }
 
-function CameraRig({ active }: { active: boolean }) {
+function CameraRig({
+  active,
+  expanded,
+}: {
+  active: boolean;
+  expanded: boolean;
+}) {
   const { camera, pointer } = useThree();
 
   useFrame(() => {
     if (!active) return;
 
+    const targetZ = expanded ? 7.2 : 7.8;
+
     camera.position.x = THREE.MathUtils.lerp(
       camera.position.x,
-      pointer.x * 0.14,
-      0.018,
+      pointer.x * (expanded ? 0.22 : 0.14),
+      0.025,
     );
 
     camera.position.y = THREE.MathUtils.lerp(
       camera.position.y,
-      pointer.y * 0.1,
-      0.018,
+      pointer.y * (expanded ? 0.16 : 0.1),
+      0.025,
     );
+
+    camera.position.z = THREE.MathUtils.lerp(camera.position.z, targetZ, 0.035);
 
     camera.lookAt(0, 0, 0);
   });
@@ -122,6 +175,7 @@ function CameraRig({ active }: { active: boolean }) {
 export default function NeuralOrb3D() {
   const wrapperRef = useRef<HTMLDivElement | null>(null);
   const [isVisible, setIsVisible] = useState(true);
+  const [expanded, setExpanded] = useState(false);
 
   useEffect(() => {
     if (!wrapperRef.current) return;
@@ -143,25 +197,33 @@ export default function NeuralOrb3D() {
   return (
     <div
       ref={wrapperRef}
-      className="h-[380px] w-full overflow-hidden rounded-3xl"
+      onPointerEnter={() => setExpanded(true)}
+      onPointerLeave={() => setExpanded(false)}
+      onPointerDown={() => setExpanded(true)}
+      onPointerUp={() => setExpanded(false)}
+      className="h-[680px] w-full cursor-pointer overflow-visible"
     >
       <Canvas
         frameloop={isVisible ? "always" : "demand"}
-        camera={{ position: [0, 0, 6], fov: 44 }}
+        camera={{ position: [0, 0, 7.8], fov: 42 }}
         dpr={[1, 1]}
         gl={{
           antialias: false,
           powerPreference: "high-performance",
           alpha: true,
         }}
+        style={{
+          background: "transparent",
+          overflow: "visible",
+        }}
       >
-        <ambientLight intensity={0.8} />
+        <ambientLight intensity={1} />
 
-        <Float speed={1} rotationIntensity={0.18} floatIntensity={0.45}>
-          <DataOrb active={isVisible} />
+        <Float speed={1.1} rotationIntensity={0.22} floatIntensity={0.55}>
+          <DataOrb active={isVisible} expanded={expanded} />
         </Float>
 
-        <CameraRig active={isVisible} />
+        <CameraRig active={isVisible} expanded={expanded} />
 
         <OrbitControls
           enableZoom={false}

@@ -27,13 +27,13 @@ export default function CounterCard({
   }, [count, value]);
 
   return (
-    <div className="rounded-3xl border border-white/15 bg-white/10 p-5 text-center shadow-lg shadow-blue-950/10 backdrop-blur-md">
-      <p className="text-3xl font-extrabold text-white">
+    <div className="rounded-3xl border border-orange-300/15 bg-black/30 p-5 text-center shadow-lg shadow-black/20">
+      <p className="text-3xl font-extrabold text-orange-100">
         <motion.span>{rounded}</motion.span>
         {suffix}
       </p>
 
-      <p className="mt-2 text-sm font-semibold text-blue-50/80">{label}</p>
+      <p className="mt-2 text-sm font-semibold text-stone-400">{label}</p>
     </div>
   );
 }

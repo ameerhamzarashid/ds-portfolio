@@ -5,43 +5,44 @@ import ScrollReveal from "./ScrollReveal";
 const storySteps = [
   {
     number: "01",
-    title: "Signal",
-    text: "Every project begins with raw data, uncertainty and questions that need structure.",
+    title: "Understand the problem",
+    text: "I start by understanding the data, the business need and the decision the work should support.",
   },
   {
     number: "02",
-    title: "Pattern",
-    text: "I use analysis, visualisation and machine learning to uncover relationships hidden inside data.",
+    title: "Build the model or analysis",
+    text: "I use Python, SQL, machine learning and analytics tools to turn raw information into useful outputs.",
   },
   {
     number: "03",
-    title: "System",
-    text: "Models become useful when they are turned into dashboards, workflows, interfaces and decisions.",
+    title: "Create a usable system",
+    text: "I connect the technical work to dashboards, web apps, reports or workflows that people can actually use.",
   },
   {
     number: "04",
-    title: "Impact",
-    text: "The final goal is clarity: helping people understand, trust and act on data.",
+    title: "Communicate the result",
+    text: "I focus on clear visual storytelling, measurable impact and practical recommendations.",
   },
 ];
 
 export default function StoryJourney() {
   return (
-    <section id="journey" className="relative px-5 py-28">
+    <section id="about" className="relative px-5 py-28">
       <div className="mx-auto max-w-7xl">
         <ScrollReveal>
           <div className="section-title-panel mb-16 max-w-4xl">
-            <p className="mb-4 text-sm font-bold uppercase tracking-[0.3em] text-cyan-200">
-              Data Journey
+            <p className="mb-4 text-sm font-bold uppercase tracking-[0.3em] text-teal-700">
+              About
             </p>
 
-            <h2 className="text-4xl font-black leading-tight text-white md:text-6xl">
-              From scattered information to intelligent systems.
+            <h2 className="text-4xl font-black leading-tight text-slate-950 md:text-6xl">
+              I turn technical work into clear, useful outcomes.
             </h2>
 
-            <p className="mt-6 max-w-3xl text-lg leading-8 text-blue-50/85">
-              This portfolio follows the same path I use in my work: understand
-              the signal, find the pattern, build the system and create impact.
+            <p className="mt-6 max-w-3xl text-lg leading-8 text-slate-700">
+              My work combines data science, analytics, machine learning and
+              product thinking. The goal is always simple: make complex
+              information easier to understand and act on.
             </p>
           </div>
         </ScrollReveal>
@@ -50,15 +51,15 @@ export default function StoryJourney() {
           {storySteps.map((step, index) => (
             <ScrollReveal key={step.title} delay={index * 0.04}>
               <div className="glass-card h-full rounded-[2rem] p-7">
-                <p className="font-display text-5xl font-black text-cyan-100/35">
+                <p className="font-display text-5xl font-black text-teal-600/25">
                   {step.number}
                 </p>
 
-                <h3 className="mt-4 text-3xl font-black text-white">
+                <h3 className="mt-4 text-2xl font-black text-slate-950">
                   {step.title}
                 </h3>
 
-                <p className="mt-4 text-base leading-8 text-blue-50/85">
+                <p className="mt-4 text-base leading-8 text-slate-600">
                   {step.text}
                 </p>
               </div>
