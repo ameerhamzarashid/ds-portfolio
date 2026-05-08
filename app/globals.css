@@ -337,3 +337,54 @@ main {
     line-height: 1.08;
   }
 }
+html,
+body {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+main {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: clip;
+}
+
+section {
+  max-width: 100%;
+}
+
+canvas {
+  touch-action: pan-y;
+}
+
+@media (max-width: 1023px) {
+  .floating-stage {
+    display: none;
+    pointer-events: none;
+  }
+
+  .number-node {
+    pointer-events: none;
+  }
+}
+
+@media (max-width: 640px) {
+  .section-title-panel {
+    width: 100%;
+    padding: 1rem;
+    border-radius: 1.25rem;
+  }
+
+  .section-title-panel h1,
+  .section-title-panel h2 {
+    font-size: 2.25rem;
+    line-height: 1.08;
+  }
+
+  .glass-card,
+  .hero-panel,
+  .deep-glass {
+    max-width: 100%;
+  }
+}
