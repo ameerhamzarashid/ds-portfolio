@@ -5,6 +5,7 @@ import Skills from "@/components/Skills";
 import StoryJourney from "@/components/StoryJourney";
 import TechCommandCentre from "@/components/TechCommandCentre";
 import DataVisuals from "@/components/DataVisuals";
+import DataWorld from "@/components/DataWorld";
 import Projects from "@/components/Projects";
 import Experience from "@/components/Experience";
 import Contact from "@/components/Contact";
@@ -42,6 +43,10 @@ export default function Home() {
 
       <ScrollScene variant="left">
         <DataVisuals />
+      </ScrollScene>
+
+      <ScrollScene variant="zoom">
+        <DataWorld />
       </ScrollScene>
 
       <ScrollScene variant="right">
