@@ -33,58 +33,25 @@ export default function ScrollScene({
     offset: ["start 85%", "end 20%"],
   });
 
-  const opacity = useTransform(
-    scrollYProgress,
-    [0, 0.18, 0.82, 1],
-    [0, 1, 1, 0.96],
-  );
+  const opacity = useTransform(scrollYProgress, [0, 0.18, 1], [0, 1, 0.96]);
+  const y = useTransform(scrollYProgress, [0, 0.35, 1], [70, 0, -20]);
+  const xLeft = useTransform(scrollYProgress, [0, 0.35, 1], [-70, 0, 0]);
+  const xRight = useTransform(scrollYProgress, [0, 0.35, 1], [70, 0, 0]);
+  const scaleDefault = useTransform(scrollYProgress, [0, 0.35, 1], [0.96, 1, 0.99]);
+  const scaleZoom = useTransform(scrollYProgress, [0, 0.35, 1], [0.9, 1, 1.01]);
+  const rotateX = useTransform(scrollYProgress, [0, 0.35, 1], [4, 0, 0]);
 
-  const yDefault = useTransform(
-    scrollYProgress,
-    [0, 0.35, 1],
-    isMobile ? [35, 0, 0] : [80, 0, -30],
-  );
-
-  const yHero = useTransform(
-    scrollYProgress,
-    [0, 0.45, 1],
-    isMobile ? [0, 0, 0] : [0, 0, -70],
-  );
-
-  const xLeft = useTransform(
-    scrollYProgress,
-    [0, 0.35, 1],
-    isMobile ? [0, 0, 0] : [-80, 0, 0],
-  );
-
-  const xRight = useTransform(
-    scrollYProgress,
-    [0, 0.35, 1],
-    isMobile ? [0, 0, 0] : [80, 0, 0],
-  );
-
-  const scaleDefault = useTransform(
-    scrollYProgress,
-    [0, 0.35, 1],
-    isMobile ? [1, 1, 1] : [0.96, 1, 0.99],
-  );
-
-  const scaleZoom = useTransform(
-    scrollYProgress,
-    [0, 0.35, 1],
-    isMobile ? [1, 1, 1] : [0.88, 1, 1.02],
-  );
-
-  const rotateX = useTransform(
-    scrollYProgress,
-    [0, 0.35, 1],
-    isMobile ? [0, 0, 0] : [4, 0, 0],
-  );
+  if (isMobile) {
+    return (
+      <div className={`relative z-10 w-full max-w-full overflow-hidden ${className}`}>
+        {children}
+      </div>
+    );
+  }
 
   const x =
     variant === "left" ? xLeft : variant === "right" ? xRight : undefined;
 
-  const y = variant === "hero" ? yHero : yDefault;
   const scale = variant === "zoom" ? scaleZoom : scaleDefault;
 
   return (
@@ -96,7 +63,7 @@ export default function ScrollScene({
         y,
         scale,
         rotateX,
-        transformPerspective: isMobile ? undefined : 1200,
+        transformPerspective: 1200,
       }}
       className={`relative z-10 w-full max-w-full overflow-hidden ${className}`}
     >

@@ -18,7 +18,9 @@ export default function Home() {
   return (
     <main>
       <ThemeBackground />
-      <JourneyScene3D />
+      <div className="hidden lg:block">
+  <JourneyScene3D />
+</div>
       <Navbar />
 
       <ScrollScene variant="hero">

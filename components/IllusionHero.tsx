@@ -15,7 +15,7 @@ export default function IllusionHero() {
   return (
     <section
       id="home"
-      className="soft-grid relative flex min-h-screen w-full items-center overflow-hidden px-4 pt-28 sm:px-5 lg:pt-28"
+      className="soft-grid relative flex min-h-screen w-full items-center overflow-hidden px-4 pt-28 sm:px-5"
     >
       <FloatingNumbers />
 
@@ -37,7 +37,7 @@ export default function IllusionHero() {
             Ameer Hamza
           </p>
 
-          <h1 className="mt-4 max-w-full text-[2.85rem] font-black leading-[1.04] text-orange-50 sm:text-5xl md:text-7xl">
+          <h1 className="mt-4 max-w-full text-[2.65rem] font-black leading-[1.04] text-orange-50 sm:text-5xl md:text-7xl">
             Building intelligent systems
             <span className="block gradient-text">
               from data, models and real-world problems.
@@ -106,23 +106,19 @@ export default function IllusionHero() {
             <CounterCard value={5} suffix="+" label="AI / ML Areas" />
             <CounterCard value={20} suffix="+" label="Tools" />
           </div>
-
-          <p className="mt-5 hidden text-sm font-semibold text-stone-400 sm:block">
-            Click the floating data nodes for subtle sound interactions.
-          </p>
         </motion.div>
 
         <motion.div
-          initial={{ opacity: 0, scale: 0.94, x: 30 }}
+          initial={{ opacity: 0, scale: 0.94, x: 20 }}
           animate={{ opacity: 1, scale: 1, x: 0 }}
           transition={{ duration: 0.9 }}
-          className="pointer-events-none relative z-0 hidden min-h-[360px] items-center justify-center overflow-hidden lg:flex lg:pointer-events-auto lg:min-h-[680px] lg:-mr-8 lg:translate-y-8"
+          className="pointer-events-none relative z-0 flex min-h-[280px] items-center justify-center overflow-hidden lg:pointer-events-auto lg:min-h-[680px] lg:-mr-8 lg:translate-y-8"
         >
-          <div className="absolute h-[700px] w-[700px] rounded-full bg-orange-500/12 blur-3xl" />
-          <div className="absolute h-[560px] w-[560px] rounded-full border border-orange-300/15" />
-          <div className="absolute h-[760px] w-[760px] rounded-full border border-amber-200/10" />
+          <div className="absolute h-[300px] w-[300px] rounded-full bg-orange-500/12 blur-3xl lg:h-[700px] lg:w-[700px]" />
+          <div className="absolute h-[240px] w-[240px] rounded-full border border-orange-300/15 lg:h-[560px] lg:w-[560px]" />
+          <div className="absolute h-[330px] w-[330px] rounded-full border border-amber-200/10 lg:h-[760px] lg:w-[760px]" />
 
-          <div className="relative h-[680px] w-full max-w-[740px] cursor-pointer overflow-visible">
+          <div className="relative h-[300px] w-full max-w-[360px] overflow-visible lg:h-[680px] lg:max-w-[740px]">
             <NeuralOrb3D />
           </div>
         </motion.div>

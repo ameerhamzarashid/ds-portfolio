@@ -16,9 +16,9 @@ function createOrbPoints(total: number) {
 
     points.push(
       new THREE.Vector3(
-        Math.cos(theta) * radius * 2.35,
-        y * 2.35,
-        Math.sin(theta) * radius * 2.35,
+        Math.cos(theta) * radius * 2.25,
+        y * 2.25,
+        Math.sin(theta) * radius * 2.25,
       ),
     );
   }
@@ -37,11 +37,11 @@ function DataOrb({
   const innerRef = useRef<THREE.Mesh>(null);
   const { pointer } = useThree();
 
-  const points = useMemo(() => createOrbPoints(52), []);
+  const points = useMemo(() => createOrbPoints(46), []);
 
   const lineGeometries = useMemo(() => {
-    return points.slice(0, 22).map((point, index) => {
-      const nextPoint = points[(index * 3 + 11) % points.length];
+    return points.slice(0, 18).map((point, index) => {
+      const nextPoint = points[(index * 3 + 9) % points.length];
       const curve = new THREE.CatmullRomCurve3([point, nextPoint]);
 
       return new THREE.TubeGeometry(curve, 5, 0.005, 6, false);
@@ -52,7 +52,7 @@ function DataOrb({
     if (!active || !groupRef.current) return;
 
     const elapsed = state.clock.elapsedTime;
-    const targetScale = expanded ? 1.1 : 1;
+    const targetScale = expanded ? 1.08 : 1;
 
     groupRef.current.scale.x = THREE.MathUtils.lerp(
       groupRef.current.scale.x,
@@ -71,14 +71,14 @@ function DataOrb({
     );
 
     groupRef.current.rotation.y =
-      elapsed * (expanded ? 0.11 : 0.07) + pointer.x * 0.2;
+      elapsed * (expanded ? 0.11 : 0.07) + pointer.x * 0.18;
 
     groupRef.current.rotation.x =
-      Math.sin(elapsed * 0.18) * 0.08 - pointer.y * 0.12;
+      Math.sin(elapsed * 0.18) * 0.06 - pointer.y * 0.1;
 
     if (innerRef.current) {
       innerRef.current.scale.setScalar(
-        1 + Math.sin(elapsed * 1.2) * (expanded ? 0.025 : 0.014),
+        1 + Math.sin(elapsed * 1.1) * (expanded ? 0.02 : 0.012),
       );
     }
   });
@@ -86,7 +86,7 @@ function DataOrb({
   return (
     <group ref={groupRef}>
       <mesh>
-        <sphereGeometry args={[1.45, 48, 48]} />
+        <sphereGeometry args={[1.42, 42, 42]} />
         <meshBasicMaterial
           color="#f97316"
           wireframe
@@ -96,7 +96,7 @@ function DataOrb({
       </mesh>
 
       <mesh ref={innerRef}>
-        <sphereGeometry args={[0.88, 36, 36]} />
+        <sphereGeometry args={[0.86, 32, 32]} />
         <meshBasicMaterial
           color="#fbbf24"
           transparent
@@ -106,7 +106,7 @@ function DataOrb({
 
       {points.map((point, index) => (
         <mesh key={index} position={point}>
-          <sphereGeometry args={[index % 7 === 0 ? 0.05 : 0.03, 8, 8]} />
+          <sphereGeometry args={[index % 7 === 0 ? 0.048 : 0.028, 8, 8]} />
           <meshBasicMaterial
             color={index % 3 === 0 ? "#fff7ed" : "#f59e0b"}
           />
@@ -140,18 +140,8 @@ function CameraRig({
 
     const targetZ = expanded ? 7.3 : 7.9;
 
-    camera.position.x = THREE.MathUtils.lerp(
-      camera.position.x,
-      pointer.x * 0.12,
-      0.025,
-    );
-
-    camera.position.y = THREE.MathUtils.lerp(
-      camera.position.y,
-      pointer.y * 0.08,
-      0.025,
-    );
-
+    camera.position.x = THREE.MathUtils.lerp(camera.position.x, pointer.x * 0.12, 0.025);
+    camera.position.y = THREE.MathUtils.lerp(camera.position.y, pointer.y * 0.08, 0.025);
     camera.position.z = THREE.MathUtils.lerp(camera.position.z, targetZ, 0.035);
 
     camera.lookAt(0, 0, 0);
@@ -184,15 +174,15 @@ export default function NeuralOrb3D() {
       ([entry]) => {
         setIsVisible(entry.isIntersecting);
       },
-      {
-        threshold: 0.1,
-      },
+      { threshold: 0.1 },
     );
 
     observer.observe(wrapperRef.current);
 
     return () => observer.disconnect();
   }, []);
+
+  const shouldAnimate = isVisible && !isMobile;
 
   return (
     <div
@@ -209,11 +199,14 @@ export default function NeuralOrb3D() {
       onPointerUp={() => {
         if (!isMobile) setExpanded(false);
       }}
-      className="pointer-events-none h-[360px] w-full overflow-visible lg:pointer-events-auto lg:h-[680px]"
+      className="pointer-events-none h-[300px] w-full overflow-visible lg:pointer-events-auto lg:h-[680px]"
     >
       <Canvas
-        frameloop={isVisible ? "always" : "demand"}
-        camera={{ position: [0, 0, isMobile ? 8.8 : 7.9], fov: isMobile ? 48 : 42 }}
+        frameloop={shouldAnimate ? "always" : "demand"}
+        camera={{
+          position: [0, 0, isMobile ? 8.8 : 7.9],
+          fov: isMobile ? 50 : 42,
+        }}
         dpr={[1, 1]}
         gl={{
           antialias: false,
@@ -229,11 +222,15 @@ export default function NeuralOrb3D() {
       >
         <ambientLight intensity={1} />
 
-        <Float speed={1.1} rotationIntensity={0.22} floatIntensity={0.55}>
-          <DataOrb active={isVisible} expanded={!isMobile && expanded} />
+        <Float
+          speed={isMobile ? 0 : 1.1}
+          rotationIntensity={isMobile ? 0 : 0.22}
+          floatIntensity={isMobile ? 0 : 0.55}
+        >
+          <DataOrb active={shouldAnimate} expanded={!isMobile && expanded} />
         </Float>
 
-        <CameraRig active={isVisible} expanded={!isMobile && expanded} />
+        <CameraRig active={shouldAnimate} expanded={!isMobile && expanded} />
 
         <OrbitControls
           enabled={false}

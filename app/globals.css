@@ -388,3 +388,40 @@ canvas {
     max-width: 100%;
   }
 }
+html,
+body {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+  overscroll-behavior-y: auto;
+  touch-action: pan-y;
+}
+
+main {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: clip;
+}
+
+section {
+  max-width: 100%;
+}
+
+canvas {
+  touch-action: pan-y;
+}
+
+@media (max-width: 1023px) {
+  .floating-stage {
+    display: none;
+    pointer-events: none;
+  }
+
+  .number-node {
+    pointer-events: none;
+  }
+
+  section {
+    transform-style: flat;
+  }
+}
