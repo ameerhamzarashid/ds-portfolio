@@ -425,3 +425,40 @@ canvas {
     transform-style: flat;
   }
 }
+.scroll-card {
+  backface-visibility: hidden;
+  transform-style: preserve-3d;
+  contain: layout paint;
+}
+
+canvas {
+  display: block;
+  background: transparent !important;
+  outline: none;
+  border: 0;
+  touch-action: pan-y;
+}
+
+.orb-shell,
+.orb-shell canvas {
+  border-radius: 9999px;
+  overflow: hidden;
+}
+
+@media (max-width: 767px) {
+  .scroll-card {
+    transform-style: flat;
+    contain: layout paint;
+  }
+
+  body {
+    -webkit-overflow-scrolling: touch;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scroll-card {
+    transform: none !important;
+    filter: none !important;
+  }
+}
