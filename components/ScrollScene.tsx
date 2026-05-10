@@ -22,7 +22,6 @@ export default function ScrollScene({
 }: ScrollSceneProps) {
   const ref = useRef<HTMLDivElement | null>(null);
   const reduceMotion = useReducedMotion();
-
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
@@ -38,67 +37,50 @@ export default function ScrollScene({
 
   const { scrollYProgress } = useScroll({
     target: ref,
-    offset: variant === "hero" ? ["start start", "end start"] : ["start 92%", "end 18%"],
+    offset:
+      variant === "hero"
+        ? ["start start", "end start"]
+        : ["start 92%", "end 18%"],
   });
 
   const smoothProgress = useSpring(scrollYProgress, {
-    stiffness: isMobile ? 90 : 120,
-    damping: isMobile ? 28 : 32,
-    mass: 0.2,
+    stiffness: 110,
+    damping: 28,
+    mass: 0.18,
   });
 
   const opacity = useTransform(
     smoothProgress,
-    [0, 0.16, 0.82, 1],
-    variant === "hero" ? [1, 1, 0.92, 0.82] : [0, 1, 1, 0.92],
+    [0, 0.16, 0.88, 1],
+    variant === "hero" ? [1, 1, 0.96, 0.9] : [0.72, 1, 1, 0.96],
   );
 
   const y = useTransform(
     smoothProgress,
-    [0, 0.35, 1],
-    isMobile ? [28, 0, -10] : [90, 0, -34],
+    [0, 0.4, 1],
+    variant === "hero" ? [0, 0, -42] : [72, 0, -18],
   );
 
-  const xLeft = useTransform(
-    smoothProgress,
-    [0, 0.4, 1],
-    isMobile ? [-18, 0, 0] : [-85, 0, 0],
-  );
-
-  const xRight = useTransform(
-    smoothProgress,
-    [0, 0.4, 1],
-    isMobile ? [18, 0, 0] : [85, 0, 0],
-  );
+  const xLeft = useTransform(smoothProgress, [0, 0.42, 1], [-72, 0, 0]);
+  const xRight = useTransform(smoothProgress, [0, 0.42, 1], [72, 0, 0]);
 
   const scaleDefault = useTransform(
     smoothProgress,
-    [0, 0.4, 1],
-    isMobile ? [0.985, 1, 1] : [0.94, 1, 0.99],
+    [0, 0.42, 1],
+    [0.96, 1, 0.995],
   );
 
   const scaleZoom = useTransform(
     smoothProgress,
-    [0, 0.45, 1],
-    isMobile ? [0.97, 1, 1.005] : [0.88, 1, 1.035],
+    [0, 0.42, 1],
+    [0.9, 1, 1.025],
   );
 
   const rotateX = useTransform(
     smoothProgress,
-    [0, 0.35, 1],
-    isMobile ? [0, 0, 0] : [5, 0, 0],
+    [0, 0.42, 1],
+    [3.5, 0, 0],
   );
-
-  const blur = useTransform(
-    smoothProgress,
-    [0, 0.2, 1],
-    isMobile ? ["blur(0px)", "blur(0px)", "blur(0px)"] : ["blur(5px)", "blur(0px)", "blur(0px)"],
-  );
-
-  const x =
-    variant === "left" ? xLeft : variant === "right" ? xRight : undefined;
-
-  const scale = variant === "zoom" || variant === "hero" ? scaleZoom : scaleDefault;
 
   if (reduceMotion) {
     return (
@@ -107,6 +89,27 @@ export default function ScrollScene({
       </div>
     );
   }
+
+  if (isMobile) {
+    return (
+      <motion.div
+        ref={ref}
+        initial={{ opacity: 0, y: 24 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.18 }}
+        transition={{ duration: 0.45, ease: "easeOut" }}
+        className={`relative z-10 w-full max-w-full overflow-hidden ${className}`}
+      >
+        {children}
+      </motion.div>
+    );
+  }
+
+  const x =
+    variant === "left" ? xLeft : variant === "right" ? xRight : undefined;
+
+  const scale =
+    variant === "zoom" || variant === "hero" ? scaleZoom : scaleDefault;
 
   return (
     <motion.div
@@ -117,7 +120,6 @@ export default function ScrollScene({
         y,
         scale,
         rotateX,
-        filter: blur,
         transformPerspective: 1400,
         willChange: "transform, opacity",
       }}

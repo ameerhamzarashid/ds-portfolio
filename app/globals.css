@@ -462,3 +462,133 @@ canvas {
     filter: none !important;
   }
 }
+.scroll-card {
+  backface-visibility: hidden;
+  transform-style: preserve-3d;
+  contain: layout paint;
+}
+
+canvas {
+  display: block;
+  background: transparent !important;
+  outline: none !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  touch-action: pan-y;
+}
+
+.orb-clean-shell {
+  position: relative;
+  aspect-ratio: 1 / 1;
+  width: 100%;
+  overflow: visible;
+  background: transparent !important;
+  border: 0 !important;
+  outline: none !important;
+  box-shadow: none !important;
+  isolation: isolate;
+}
+
+.mobile-orb-shell {
+  position: absolute;
+  inset: 0;
+  border-radius: 9999px;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 50% 50%, rgba(251, 191, 36, 0.24), transparent 30%),
+    radial-gradient(circle at 50% 50%, rgba(249, 115, 22, 0.2), transparent 54%),
+    transparent;
+  transform: translateZ(0);
+}
+
+.mobile-orb-glow {
+  position: absolute;
+  inset: 12%;
+  border-radius: 9999px;
+  background: radial-gradient(circle, rgba(249, 115, 22, 0.38), transparent 62%);
+  filter: blur(18px);
+}
+
+.mobile-orb-ring {
+  position: absolute;
+  border-radius: 9999px;
+  border: 1px solid rgba(251, 191, 36, 0.34);
+}
+
+.mobile-orb-ring.ring-one {
+  inset: 18%;
+}
+
+.mobile-orb-ring.ring-two {
+  inset: 28%;
+  border-color: rgba(255, 247, 237, 0.22);
+}
+
+.mobile-orb-ring.ring-three {
+  inset: 38%;
+  border-color: rgba(249, 115, 22, 0.28);
+}
+
+.mobile-orb-core {
+  position: absolute;
+  inset: 31%;
+  border-radius: 9999px;
+  border: 1px solid rgba(255, 247, 237, 0.3);
+  background: rgba(249, 115, 22, 0.08);
+}
+
+.mobile-orb-core .node {
+  position: absolute;
+  height: 7px;
+  width: 7px;
+  border-radius: 9999px;
+  background: #fbbf24;
+  box-shadow: 0 0 16px rgba(251, 191, 36, 0.75);
+}
+
+.mobile-orb-core .node-one {
+  left: 10%;
+  top: 28%;
+}
+
+.mobile-orb-core .node-two {
+  right: 14%;
+  top: 22%;
+}
+
+.mobile-orb-core .node-three {
+  left: 22%;
+  bottom: 18%;
+}
+
+.mobile-orb-core .node-four {
+  right: 26%;
+  bottom: 16%;
+}
+
+.mobile-orb-core .node-five {
+  left: 48%;
+  top: 8%;
+}
+
+.mobile-orb-core .node-six {
+  left: 46%;
+  bottom: 8%;
+}
+
+@media (max-width: 767px) {
+  .scroll-card {
+    transform: none !important;
+    filter: none !important;
+    opacity: 1 !important;
+    contain: content;
+  }
+
+  * {
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  body {
+    -webkit-overflow-scrolling: touch;
+  }
+}
