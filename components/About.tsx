@@ -1,42 +1,42 @@
-import SectionTitle from "./SectionTitle";
-
 export default function About() {
   return (
-    <section id="about" className="px-5 py-24">
-      <div className="mx-auto max-w-7xl">
-        <SectionTitle
-          eyebrow="About"
-          title="A data professional focused on practical AI and analytics"
-          description="I combine data analytics, machine learning, business intelligence and applied AI to build solutions that are clear, useful and grounded in real problems."
-        />
+    <section
+      id="about"
+      className="relative mx-auto flex min-h-[70vh] w-full max-w-7xl items-center px-5 py-24"
+    >
+      <div className="grid w-full gap-8 lg:grid-cols-[0.8fr_1.2fr]">
+        <div className="section-title-panel">
+          <p className="mb-3 text-sm font-black uppercase tracking-[0.3em] text-orange-300">
+            About
+          </p>
+          <h2 className="text-4xl font-black text-orange-50 md:text-6xl">
+            Data scientist focused on useful AI.
+          </h2>
+        </div>
 
-        <div className="grid gap-6 md:grid-cols-3">
-          <div className="glass-card rounded-3xl p-6">
-            <h3 className="mb-3 text-xl font-bold text-white">
-              Data Analytics
-            </h3>
-            <p className="leading-7 text-slate-300">
-              I work with SQL, Python, Power BI, Tableau and Excel to clean,
-              analyse and communicate data through dashboards and reports.
-            </p>
-          </div>
+        <div className="deep-glass rounded-[2rem] p-6 md:p-9">
+          <p className="text-lg leading-8 text-stone-300">
+            I am a Data Scientist with an MSc in Data Science and experience
+            across machine learning, analytics, dashboards, and AI product
+            development. My work focuses on turning messy data into practical
+            systems that support decisions, automation, and real-world impact.
+          </p>
 
-          <div className="glass-card rounded-3xl p-6">
-            <h3 className="mb-3 text-xl font-bold text-white">
-              Machine Learning
-            </h3>
-            <p className="leading-7 text-slate-300">
-              I build predictive models, deep learning systems and computer
-              vision applications using scikit-learn, TensorFlow and PyTorch.
-            </p>
-          </div>
+          <div className="mt-8 grid gap-4 sm:grid-cols-3">
+            <div className="rounded-2xl bg-white/5 p-5">
+              <p className="text-3xl font-black text-orange-300">MSc</p>
+              <p className="mt-2 text-sm text-stone-300">Data Science</p>
+            </div>
 
-          <div className="glass-card rounded-3xl p-6">
-            <h3 className="mb-3 text-xl font-bold text-white">Applied AI</h3>
-            <p className="leading-7 text-slate-300">
-              I explore generative AI, RAG, embeddings and LLM-based workflows
-              to create useful tools for real-world decision support.
-            </p>
+            <div className="rounded-2xl bg-white/5 p-5">
+              <p className="text-3xl font-black text-orange-300">3+</p>
+              <p className="mt-2 text-sm text-stone-300">Years Experience</p>
+            </div>
+
+            <div className="rounded-2xl bg-white/5 p-5">
+              <p className="text-3xl font-black text-orange-300">AI</p>
+              <p className="mt-2 text-sm text-stone-300">ML, BI, MLOps</p>
+            </div>
           </div>
         </div>
       </div>
