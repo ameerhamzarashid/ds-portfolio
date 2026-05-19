@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 
 const navItems = [
   { label: "About", href: "#about" },
@@ -18,48 +18,46 @@ export default function Navbar() {
 
   return (
     <motion.header
-      initial={{ y: -60, opacity: 0 }}
+      initial={{ y: -50, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
-      className="fixed left-0 top-0 z-[999] w-full border-b border-orange-100/10 bg-black/75 backdrop-blur-xl"
+      className="fixed left-0 top-0 z-[999] w-full border-b border-black/10 bg-white/70 shadow-sm backdrop-blur-2xl"
     >
       <nav className="mx-auto flex max-w-7xl items-center justify-between px-5 py-4">
         <a
           href="#home"
           onClick={closeMenu}
-          className="text-lg font-black tracking-wide text-orange-100"
+          className="text-xl font-black tracking-tight text-black"
         >
-          Ameer<span className="text-orange-400">.</span>
+          Ameer<span className="text-orange-600">.</span>
         </a>
 
-        <div className="hidden items-center gap-6 lg:flex">
+        <div className="hidden items-center gap-7 lg:flex">
           {navItems.map((item) => (
             <a
               key={item.href}
               href={item.href}
-              className="text-sm font-semibold text-stone-200 transition hover:text-orange-300"
+              className="text-sm font-bold text-black/70 transition hover:text-orange-600"
             >
               {item.label}
             </a>
           ))}
         </div>
 
-        <div className="hidden lg:block">
-          <a
-            href="/Ameer-Hamza-CV.pdf"
-            download
-            className="rounded-full border border-orange-300/20 bg-orange-500 px-4 py-2 text-sm font-bold text-white transition hover:bg-amber-500"
-          >
-            Download CV
-          </a>
-        </div>
+        <a
+          href="/Ameer-Hamza-CV.pdf"
+          download
+          className="hidden rounded-full bg-orange-600 px-5 py-2.5 text-sm font-black text-white shadow-lg shadow-orange-600/20 transition hover:bg-black lg:block"
+        >
+          Download CV
+        </a>
 
         <button
           type="button"
           onClick={() => setIsOpen((prev) => !prev)}
-          className="flex h-10 w-10 items-center justify-center rounded-full border border-orange-300/20 bg-black/40 text-orange-100 lg:hidden"
+          className="flex h-11 w-11 items-center justify-center rounded-full border border-black/10 bg-white/70 text-xl font-black text-black lg:hidden"
           aria-label="Toggle navigation menu"
         >
-          <span className="text-xl font-black">{isOpen ? "×" : "☰"}</span>
+          {isOpen ? "×" : "☰"}
         </button>
       </nav>
 
@@ -69,8 +67,7 @@ export default function Navbar() {
             initial={{ opacity: 0, y: -12 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -12 }}
-            transition={{ duration: 0.2 }}
-            className="border-t border-orange-100/10 bg-black/95 px-5 py-5 lg:hidden"
+            className="border-t border-black/10 bg-white/95 px-5 py-5 backdrop-blur-xl lg:hidden"
           >
             <div className="mx-auto flex max-w-7xl flex-col gap-3">
               {navItems.map((item) => (
@@ -78,7 +75,7 @@ export default function Navbar() {
                   key={item.href}
                   href={item.href}
                   onClick={closeMenu}
-                  className="rounded-2xl border border-orange-300/10 bg-white/5 px-4 py-3 text-sm font-bold text-stone-200 transition hover:bg-orange-500/15 hover:text-orange-200"
+                  className="rounded-2xl border border-black/10 bg-white px-4 py-3 text-sm font-black text-black transition hover:border-orange-500 hover:text-orange-600"
                 >
                   {item.label}
                 </a>
@@ -88,7 +85,7 @@ export default function Navbar() {
                 href="/Ameer-Hamza-CV.pdf"
                 download
                 onClick={closeMenu}
-                className="mt-2 rounded-2xl bg-orange-500 px-4 py-3 text-center text-sm font-black text-white transition hover:bg-amber-500"
+                className="rounded-2xl bg-orange-600 px-4 py-3 text-center text-sm font-black text-white transition hover:bg-black"
               >
                 Download CV
               </a>
