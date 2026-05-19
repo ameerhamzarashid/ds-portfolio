@@ -4,7 +4,7 @@ export const caseStudies = [
     title: "SkillLens AI",
     image: "/projects/skilllens-ai.png",
     summary:
-      "A workforce intelligence platform for job market analysis, CV matching, salary prediction and skill gap insights.",
+      "Workforce intelligence platform for job market analysis, CV matching, salary prediction and skill gap insights.",
     problem:
       "Job seekers often struggle to understand which skills matter, how their CV matches roles, and what salary range they can expect.",
     solution:
@@ -28,7 +28,7 @@ export const caseStudies = [
     stack: ["Python", "Streamlit", "Telemetry Analytics", "Rule Logic"],
     outcome:
       "Produced an interactive dashboard that converts telemetry into clear driver coaching insights.",
-    github: "#",
+    github: "https://github.com/ameerhamzarashid/ai-race-engineer",
     demo: "#",
   },
   {
@@ -44,7 +44,8 @@ export const caseStudies = [
     stack: ["Python", "CNN", "TensorFlow", "Medical AI"],
     outcome:
       "Demonstrated applied computer vision for healthcare-focused image classification.",
-    github: "#",
+    github:
+      "https://github.com/ameerhamzarashid/Alzheimer-Detection-Using-Deep-Learning-Algorithms",
     demo: "#",
   },
   {
@@ -52,7 +53,7 @@ export const caseStudies = [
     title: "Fight Anomaly Detection",
     image: "/projects/fight-anomaly.png",
     summary:
-      "A computer vision web app for detecting anomalies and suspicious activity in video footage.",
+      "A computer vision web application for detecting anomalies and suspicious activity in video footage.",
     problem:
       "Manual video monitoring is slow and unreliable when suspicious events need quick attention.",
     solution:
@@ -60,7 +61,8 @@ export const caseStudies = [
     stack: ["Python", "Flask", "Computer Vision", "Video AI"],
     outcome:
       "Created a working interface for analysing uploaded footage and supporting anomaly detection workflows.",
-    github: "#",
+    github:
+      "https://github.com/ameerhamzarashid/Fight-Anomaly-Detection-Web-App",
     demo: "#",
   },
   {
@@ -76,23 +78,24 @@ export const caseStudies = [
     stack: ["Python", "Flask", "Machine Learning", "Healthcare"],
     outcome:
       "Built a simple healthcare prediction prototype with a clear user input and result flow.",
-    github: "#",
+    github:
+      "https://github.com/ameerhamzarashid/Dengue-Prediction-Using-Random-Forest-Algorithm",
     demo: "#",
   },
   {
-    slug: "image-steganography-research",
-    title: "Image Steganography Research",
+    slug: "plant-disease-prediction",
+    title: "Plant Disease Prediction",
     image: "/projects/plant-steganography.jpg",
     summary:
-      "A research-focused deep learning architecture for hiding and revealing multiple secret images.",
+      "A machine learning and web application project for identifying plant disease patterns from image-based input.",
     problem:
-      "Image steganography needs models that can hide multiple secret images while preserving reconstruction quality.",
+      "Plant disease diagnosis can be difficult without expert support, especially when symptoms need to be interpreted visually.",
     solution:
-      "I designed a deep learning workflow involving preparation, hiding and reveal networks for multi-image steganography.",
-    stack: ["Deep Learning", "Computer Vision", "CNN", "Research"],
+      "I built a prediction-focused web application that uses image-based inputs and machine learning logic to support plant disease identification.",
+    stack: ["Python", "Machine Learning", "Computer Vision", "Web App"],
     outcome:
-      "Produced a research-style architecture showing how multiple images can be encoded and recovered.",
-    github: "#",
+      "Created a practical AI prototype that demonstrates image-based prediction and a usable web interface.",
+    github: "https://github.com/ameerhamzarashid/Plant-Disease-Prediction",
     demo: "#",
   },
 ];
@@ -100,3 +103,5 @@ export const caseStudies = [
 export function getCaseStudy(slug: string) {
   return caseStudies.find((study) => study.slug === slug);
 }
+
+export type CaseStudy = (typeof caseStudies)[number];
