@@ -1,84 +1,103 @@
 "use client";
 
-import dynamic from "next/dynamic";
-import { motion } from "framer-motion";
+import Image from "next/image";
+import {
+  motion,
+  useReducedMotion,
+  useScroll,
+  useSpring,
+  useTransform,
+} from "framer-motion";
 import { FaGithub, FaLinkedin } from "react-icons/fa";
 import { MdEmail } from "react-icons/md";
-import CounterCard from "./CounterCard";
-import FloatingNumbers from "./FloatingNumbers";
 
-const NeuralOrb3D = dynamic(() => import("./NeuralOrb3D"), {
-  ssr: false,
-});
+const floatingTerms = [
+  "AI",
+  "ML",
+  "RAG",
+  "SQL",
+  "NLP",
+  "MLOps",
+  "Vision",
+  "Analytics",
+];
 
 export default function IllusionHero() {
+  const reduceMotion = useReducedMotion();
+  const { scrollYProgress } = useScroll();
+
+  const smoothScroll = useSpring(scrollYProgress, {
+    stiffness: 70,
+    damping: 24,
+    mass: 0.2,
+  });
+
+  const orbY = useTransform(smoothScroll, [0, 0.25], [0, -70]);
+  const orbScale = useTransform(smoothScroll, [0, 0.25], [1, 0.94]);
+  const orbRotate = useTransform(smoothScroll, [0, 0.25], [0, -8]);
+
   return (
     <section
       id="home"
-      className="soft-grid relative flex min-h-screen w-full items-center overflow-hidden px-4 pt-28 sm:px-5"
+      className="relative flex min-h-screen items-center overflow-hidden px-5 pt-28"
     >
-      <FloatingNumbers />
+      <div className="absolute left-[-12%] top-[-20%] h-[520px] w-[520px] rounded-full bg-orange-300/35 blur-3xl" />
+      <div className="absolute bottom-[-22%] right-[-18%] h-[620px] w-[620px] rounded-full bg-white blur-3xl" />
 
-      <div className="pointer-events-none absolute right-[-180px] top-10 h-[420px] w-[420px] rounded-full bg-orange-500/20 blur-3xl lg:h-[620px] lg:w-[620px]" />
-      <div className="pointer-events-none absolute bottom-[-160px] left-[-180px] h-[420px] w-[420px] rounded-full bg-amber-500/10 blur-3xl lg:h-[600px] lg:w-[600px]" />
-
-      <div className="relative mx-auto grid w-full max-w-7xl items-center gap-8 overflow-hidden lg:grid-cols-[0.95fr_1.05fr] lg:gap-10">
+      <div className="relative mx-auto grid w-full max-w-7xl items-center gap-12 lg:grid-cols-[1.04fr_0.96fr]">
         <motion.div
           initial={{ opacity: 0, y: 28 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7 }}
-          className="hero-panel relative z-10 w-full max-w-full overflow-hidden rounded-[1.5rem] p-5 sm:p-6 md:rounded-[2rem] md:p-9"
+          transition={{ duration: 0.75, ease: "easeOut" }}
+          className="relative rounded-[2.2rem] border border-white/80 bg-white/72 p-6 shadow-2xl shadow-black/10 backdrop-blur-2xl md:p-10"
         >
-          <p className="mb-5 inline-flex max-w-full rounded-full border border-orange-300/20 bg-orange-500/10 px-4 py-2 text-[11px] font-bold uppercase tracking-[0.14em] text-orange-200 sm:px-5 sm:text-sm sm:tracking-[0.18em]">
-            Data Science • ML • AI Products
-          </p>
-
-          <p className="font-display text-sm font-black uppercase tracking-[0.28em] text-orange-200 sm:text-lg sm:tracking-[0.38em] md:text-xl">
-            Ameer Hamza
-          </p>
-
-          <h1 className="mt-4 max-w-full text-[2.65rem] font-black leading-[1.04] text-orange-50 sm:text-5xl md:text-7xl">
-            Building intelligent systems
-            <span className="block gradient-text">
-              from data, models and real-world problems.
+          <div className="mb-6 flex w-fit items-center gap-3 rounded-full border border-orange-600/15 bg-orange-50 px-4 py-2 shadow-sm">
+            <span className="h-2.5 w-2.5 rounded-full bg-orange-600" />
+            <span className="text-xs font-black uppercase tracking-[0.22em] text-orange-700">
+              Data Scientist • AI Engineer
             </span>
+          </div>
+
+          <h1 className="max-w-4xl text-[3.2rem] font-black leading-[0.98] tracking-[-0.05em] text-black sm:text-6xl md:text-7xl">
+            I build AI systems that turn data into{" "}
+            <span className="text-orange-600">decisions.</span>
           </h1>
 
-          <p className="mt-6 max-w-full text-base font-medium leading-7 text-stone-300 sm:text-lg sm:leading-8">
-            I create machine learning models, analytics dashboards and AI-driven
-            products that turn complex information into clear, useful outcomes.
+          <p className="mt-6 max-w-2xl text-base font-semibold leading-8 text-black/65 md:text-lg">
+            Data science portfolio focused on machine learning, analytics,
+            dashboards, MLOps and practical AI products.
           </p>
 
-          <div className="mt-8 grid gap-3 sm:flex sm:flex-wrap sm:gap-4">
+          <div className="mt-8 flex flex-wrap gap-4">
             <a
               href="#projects"
-              className="rounded-full bg-orange-500 px-6 py-3 text-center text-sm font-black text-white transition hover:bg-amber-500 sm:px-7 sm:text-base"
+              className="rounded-full bg-orange-600 px-7 py-3 text-sm font-black text-white shadow-lg shadow-orange-600/20 transition hover:-translate-y-0.5 hover:bg-black"
             >
               View Projects
             </a>
 
             <a
-              href="#skills"
-              className="rounded-full bg-orange-100 px-6 py-3 text-center text-sm font-black text-black transition hover:bg-amber-200 sm:px-7 sm:text-base"
+              href="#contact"
+              className="rounded-full border border-black/10 bg-white px-7 py-3 text-sm font-black text-black transition hover:-translate-y-0.5 hover:border-orange-600 hover:text-orange-600"
             >
-              Explore Skills
+              Contact Me
             </a>
 
             <a
               href="/Ameer-Hamza-CV.pdf"
               download
-              className="rounded-full border border-orange-300/20 bg-white/10 px-6 py-3 text-center text-sm font-black text-orange-50 transition hover:bg-orange-100 hover:text-black sm:px-7 sm:text-base"
+              className="rounded-full border border-orange-600/20 bg-orange-50 px-7 py-3 text-sm font-black text-orange-700 transition hover:-translate-y-0.5 hover:bg-orange-600 hover:text-white"
             >
               Download CV
             </a>
           </div>
 
-          <div className="mt-6 flex flex-wrap gap-4 text-sm font-semibold sm:gap-5">
+          <div className="mt-8 flex flex-wrap gap-5 text-sm font-bold">
             <a
               href="https://github.com/ameerhamzarashid"
               target="_blank"
               rel="noreferrer"
-              className="flex items-center gap-2 text-stone-300 transition hover:text-orange-300"
+              className="flex items-center gap-2 text-black/60 transition hover:text-orange-600"
             >
               <FaGithub /> GitHub
             </a>
@@ -87,39 +106,122 @@ export default function IllusionHero() {
               href="https://www.linkedin.com/in/ameerhamza78644"
               target="_blank"
               rel="noreferrer"
-              className="flex items-center gap-2 text-stone-300 transition hover:text-orange-300"
+              className="flex items-center gap-2 text-black/60 transition hover:text-orange-600"
             >
               <FaLinkedin /> LinkedIn
             </a>
 
             <a
               href="mailto:ameerhamzarashid.uk@gmail.com"
-              className="flex items-center gap-2 text-stone-300 transition hover:text-orange-300"
+              className="flex items-center gap-2 text-black/60 transition hover:text-orange-600"
             >
               <MdEmail /> Email
             </a>
           </div>
-
-          <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2 md:mt-10 md:grid-cols-4">
-            <CounterCard value={10} suffix="+" label="Projects" />
-            <CounterCard value={3} suffix="+" label="Years Experience" />
-            <CounterCard value={5} suffix="+" label="AI / ML Areas" />
-            <CounterCard value={20} suffix="+" label="Tools" />
-          </div>
         </motion.div>
 
         <motion.div
-          initial={{ opacity: 0, scale: 0.96, x: 16 }}
-          animate={{ opacity: 1, scale: 1, x: 0 }}
-          transition={{ duration: 0.8 }}
-          className="relative z-0 flex min-h-[300px] items-center justify-center overflow-visible lg:min-h-[680px] lg:-mr-8 lg:translate-y-8"
+          style={
+            reduceMotion
+              ? undefined
+              : {
+                  y: orbY,
+                  scale: orbScale,
+                  rotate: orbRotate,
+                }
+          }
+          initial={{ opacity: 0, scale: 0.94, y: 24 }}
+          animate={{ opacity: 1, scale: 1, y: 0 }}
+          transition={{ duration: 0.85, ease: "easeOut" }}
+          className="relative mx-auto aspect-square w-full max-w-[560px]"
         >
-          <div className="pointer-events-none absolute h-[280px] w-[280px] rounded-full bg-orange-500/12 blur-3xl sm:h-[360px] sm:w-[360px] lg:h-[700px] lg:w-[700px]" />
-          <div className="pointer-events-none absolute h-[240px] w-[240px] rounded-full border border-orange-300/15 sm:h-[340px] sm:w-[340px] lg:h-[560px] lg:w-[560px]" />
-          <div className="pointer-events-none absolute h-[310px] w-[310px] rounded-full border border-amber-200/10 sm:h-[440px] sm:w-[440px] lg:h-[760px] lg:w-[760px]" />
+          <div className="absolute inset-0 rounded-[3rem] border border-white/80 bg-white/55 shadow-2xl shadow-black/10 backdrop-blur-2xl" />
+          <div className="absolute inset-[9%] rounded-full border border-orange-600/20" />
+          <div className="absolute inset-[20%] rounded-full border border-black/10" />
+          <div className="absolute inset-[31%] rounded-full border border-orange-600/20" />
 
-          <div className="relative aspect-square w-full max-w-[320px] bg-transparent sm:max-w-[420px] lg:max-w-[700px]">
-            <NeuralOrb3D />
+          <motion.div
+            animate={
+              reduceMotion
+                ? undefined
+                : {
+                    rotate: 360,
+                  }
+            }
+            transition={{ duration: 28, repeat: Infinity, ease: "linear" }}
+            className="absolute inset-[14%] rounded-full border border-dashed border-orange-600/25"
+          />
+
+          <motion.div
+            animate={
+              reduceMotion
+                ? undefined
+                : {
+                    rotate: -360,
+                  }
+            }
+            transition={{ duration: 38, repeat: Infinity, ease: "linear" }}
+            className="absolute inset-[25%] rounded-full border border-dashed border-black/15"
+          />
+
+          <div className="absolute left-1/2 top-1/2 h-28 w-28 -translate-x-1/2 -translate-y-1/2 rounded-full bg-orange-600 shadow-[0_0_90px_rgba(234,88,12,0.45)]" />
+          <div className="absolute left-1/2 top-1/2 h-16 w-16 -translate-x-1/2 -translate-y-1/2 rounded-full bg-white" />
+          <div className="absolute left-1/2 top-1/2 h-8 w-8 -translate-x-1/2 -translate-y-1/2 rounded-full bg-black" />
+
+          {floatingTerms.map((term, index) => {
+            const angle = (index / floatingTerms.length) * Math.PI * 2;
+            const radius = 38;
+            const x = 50 + Math.cos(angle) * radius;
+            const y = 50 + Math.sin(angle) * radius;
+
+            return (
+              <motion.span
+                key={term}
+                className="absolute rounded-full border border-orange-600/15 bg-white/85 px-4 py-2 text-xs font-black text-black shadow-xl backdrop-blur-xl"
+                style={{
+                  left: `${x}%`,
+                  top: `${y}%`,
+                  translateX: "-50%",
+                  translateY: "-50%",
+                }}
+                animate={
+                  reduceMotion
+                    ? undefined
+                    : {
+                        y: [0, -10, 0],
+                        opacity: [0.72, 1, 0.72],
+                        scale: [0.96, 1.04, 0.96],
+                      }
+                }
+                transition={{
+                  duration: 3.2 + index * 0.2,
+                  repeat: Infinity,
+                  delay: index * 0.15,
+                  ease: "easeInOut",
+                }}
+              >
+                {term}
+              </motion.span>
+            );
+          })}
+
+          <div className="absolute bottom-6 left-6 flex items-center gap-3 rounded-full border border-white/80 bg-white/90 p-2 pr-5 shadow-xl backdrop-blur-2xl">
+            <div className="relative h-12 w-12 overflow-hidden rounded-full bg-orange-50">
+              <Image
+                src="/avatar/ameer-bitmoji.png"
+                alt="Ameer Hamza avatar"
+                fill
+                className="object-cover object-top"
+                sizes="48px"
+              />
+            </div>
+
+            <div>
+              <p className="text-sm font-black text-black">Ameer Hamza</p>
+              <p className="text-xs font-bold text-orange-600">
+                Data Scientist
+              </p>
+            </div>
           </div>
         </motion.div>
       </div>
